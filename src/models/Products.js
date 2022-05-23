@@ -35,7 +35,7 @@ module.exports = (sequelize) =>{
         },
 
         price: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.FLOAT,
             defaultValue: 0
         },
 
