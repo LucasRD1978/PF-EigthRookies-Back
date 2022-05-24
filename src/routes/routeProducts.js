@@ -18,7 +18,6 @@ route.get("/", (req, res) => {
     } )
 })
 
-//--------- Ruta Admin --------------------------------
 
 // -----------RUTA NAME ------------------------------
 // item.name.toLowerCase().includes(name.toLowerCase()))
