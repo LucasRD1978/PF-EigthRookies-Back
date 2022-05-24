@@ -41,11 +41,11 @@ route.get("/:id", async (req, res, next) => {
     const {id} = req.params;
     try{
     const prodBuscado = await Products.findByPk(id)
-    if(prodBuscado.length !== 0){
+    if(prodBuscado.length === 0){
 
-        res.send(prodBuscado)
-    } else {
         res.status(400).send("No se encontro la busqueda por id")
+    } else {
+        res.send(prodBuscado)
     }
 } catch(error){
     console.log("No se encontro el ID")
