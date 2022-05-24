@@ -60,7 +60,7 @@ function cargarCeluraresEnBd(){
             })
           
 
-        .catch(()=>next())
+        .catch((err) => console.log(err))
         }
 
 function cargarElectronicaEnDb(){    
