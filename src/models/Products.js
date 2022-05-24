@@ -16,7 +16,7 @@ module.exports = (sequelize) =>{
 
         image:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
 
         image2:{
@@ -33,17 +33,6 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING,
             allowNull: true
         },
-        price: {
-            type: DataTypes.FLOAT,
-            defaultValue: 0
-        },
 
-        stock: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        },
-        category:{
-            type:DataTypes.STRING,
-        }
     })
 }
