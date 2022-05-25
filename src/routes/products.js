@@ -6,7 +6,7 @@ const{Products,Categories}=require('../db')
 const router = Router();
 
 router.get('/',(req,res,next)=>{
-    Products.findAll()
+    Products.findAll({include:[Categories]})
     .then((r)=>{return res.send(r)})
     .catch(()=>next())
 })

@@ -33,6 +33,12 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING,
             allowNull: true
         },
+        categoria:{
+            type:DataTypes.STRING,
+        },
+        price:{
+            type:DataTypes.FLOAT
+        }
 
     })
 }
