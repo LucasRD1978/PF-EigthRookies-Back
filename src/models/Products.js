@@ -6,12 +6,12 @@ module.exports = (sequelize) =>{
 
         name: {
              type: DataTypes.STRING,
-             //allowNull: false
+             allowNull: false
          },
 
         description: {
             type: DataTypes.STRING,
-            //allowNull: false
+            allowNull: false
         },
 
         image:{
@@ -34,12 +34,16 @@ module.exports = (sequelize) =>{
             allowNull: true
         },
 
-        category: {
-            type: DataTypes.STRING
-        },
+        // category: {
+        //     type: DataTypes.STRING
+        // },
 
         price: {
             type: DataTypes.FLOAT
+        },
+
+        range_price: {
+            type: DataTypes.INTEGER
         }
 
     })

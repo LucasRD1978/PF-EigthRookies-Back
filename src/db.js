@@ -49,8 +49,8 @@ Sales.belongsTo(ShoppingCar);
 Products.hasMany(Buy);
 Buy.belongsTo(Products);
 
-Products.hasMany(PriceRange);
-PriceRange.belongsTo(Products);
+PriceRange.hasMany(Products);
+Products.belongsTo(PriceRange);
 
 Rol.hasMany(User);
 User.belongsTo(Rol);
@@ -64,11 +64,11 @@ Sales.belongsTo(CommercialInvoiceType);
 CommercialInvoiceType.hasMany(Buy);
 Buy.belongsTo(CommercialInvoiceType);
 
-User.hasMany(Cities);
-Cities.belongsTo(User);
+Cities.hasMany(User);
+User.belongsTo(Cities);
 
-Cities.hasMany(Province);
-Province.belongsTo(Cities);
+Province.hasMany(Cities);
+Cities.belongsTo(Province);
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
