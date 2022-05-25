@@ -42,5 +42,13 @@ module.exports = (sequelize) =>{
             //allowNull: true
         },
 
+        category: {
+            type: DataTypes.STRING
+        },
+
+        price: {
+            type: DataTypes.FLOAT
+        }
+
     })
 }

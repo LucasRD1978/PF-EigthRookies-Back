@@ -36,6 +36,7 @@ const { Products, Categories } = sequelize.models;
 Products.hasMany(Categories);
 Categories.belongsTo(Products);
 
+
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
