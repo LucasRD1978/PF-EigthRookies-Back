@@ -72,7 +72,9 @@ function cargarCeluraresEnBd(){
             })
           
 
+
         .catch((err)=>console.log(err))
+
         }
 
 function cargarElectronicaEnDb(){    
@@ -161,4 +163,6 @@ function cargarElectronicaEnDb(){
 
 
 
+
 module.exports={cargarCeluraresEnBd,cargarElectronicaEnDb}
+
