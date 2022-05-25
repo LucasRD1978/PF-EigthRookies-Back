@@ -1,7 +1,7 @@
 
 const axios=require('axios')
 
-const{Products,Categories}=require('../db.js')
+const{Products,Category}=require('../db.js')
 
 
 function cargarCeluraresEnBd(){
@@ -51,16 +51,16 @@ function cargarCeluraresEnBd(){
                 const naux2=new Set(aux2)
                 aux2=Array.from(naux2)
                     for(let e of aux2){
-                         await Categories.findOrCreate({
+                         await Category.findOrCreate({
                                where:{name:`${e}`}
                               })
                               
                             }
                             aux1.map(async (e)=>{
                                 let p=await Products.findOne({where:{name:e.name}})
-                                let c=await Categories.findOrCreate({where:{name:e.category}})
+                                let c=await Category.findOrCreate({where:{name:e.category}})
                                 c[0].addProducts(p)
-                              //  p.addCategories(c[0])
+                              //  p.addCategory(c[0])
                                        // console.log('uniendo')
                                         
                                                 
@@ -122,7 +122,7 @@ function cargarElectronicaEnDb(){
                 const naux2=new Set(aux2)
                 aux2=Array.from(naux2)
                     for(e of aux2){
-                         await Categories.findOrCreate({
+                         await Category.findOrCreate({
                                where:{name:e}
                               })
                             }
@@ -136,7 +136,7 @@ function cargarElectronicaEnDb(){
     .then(()=>{
         aux1.map(async(e)=>
                  {  let p=await Products.findOne({where:{name:e.name}})
-                    let c=await Categories.findOrCreate({where:{name:e.category.split('-').join('')}})
+                    let c=await Category.findOrCreate({where:{name:e.category.split('-').join('')}})
                     console.log(e.category)
                         if(p){
                          c[0].addProducts(p)}

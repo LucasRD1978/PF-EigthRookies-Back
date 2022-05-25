@@ -1,7 +1,7 @@
 
 const axios=require('axios')
 const {asociar}=require('./asociaciones')
-const{Products,Categories}=require('../db.js')
+const{Products,Category}=require('../db.js')
 function CargarTodo(){
 
 let aux=[]
@@ -40,7 +40,7 @@ for(let i=0;i<10;i++){
                         name:e.name,
                     }})}
                 for(let e of aux1){
-                    await Categories.findOrCreate({
+                    await Category.findOrCreate({
                         where:{name:e.category}
                     })
                 }    
