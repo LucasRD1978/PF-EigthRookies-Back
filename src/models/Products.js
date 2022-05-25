@@ -33,6 +33,14 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING,
             allowNull: true
         },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        price: {
+            type: DataTypes.INTEGER,
+            //allowNull: true
+        },
 
         category: {
             type: DataTypes.STRING
