@@ -34,8 +34,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Products, Categories, User, ShoppingCar, Sales, Buy, PriceRange, Rol, PaymenthMethod,
   CommercialInvoiceType, Cities, Province } = sequelize.models;
 
-Products.hasMany(Categories);
-Categories.belongsTo(Products);
+Categories.hasMany(Products);
+Products.belongsTo(Categories);
 
 User.hasMany(ShoppingCar);
 ShoppingCar.belongsTo(User);
