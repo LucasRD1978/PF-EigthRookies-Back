@@ -5,16 +5,16 @@ module.exports = (sequelize) =>{
     sequelize.define('products', {
 
         name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+             type: DataTypes.STRING,
+             //allowNull: false
+         },
 
         description: {
             type: DataTypes.STRING,
-            allowNull: false
+            //allowNull: false
         },
 
-        image1:{
+        image:{
             type: DataTypes.STRING,
             allowNull: true
         },
@@ -33,15 +33,12 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING,
             allowNull: true
         },
-
-        price: {
-            type: DataTypes.FLOAT,
-            defaultValue: 0
+        categoria:{
+            type:DataTypes.STRING,
         },
-
-        stock: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
+        price:{
+            type:DataTypes.FLOAT
         }
+
     })
 }
