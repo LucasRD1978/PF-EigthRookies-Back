@@ -2,12 +2,13 @@ const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) =>{
 
-    sequelize.define('categories', {
+    sequelize.define('category', {
 
         name: {
             type: DataTypes.STRING,
             allowNull: false
         },
+      
 
     })
 }

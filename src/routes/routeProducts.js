@@ -1,5 +1,5 @@
 const express = require('express');
-const {Products} =require('../db.js');
+const {Products,Categories} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
 
@@ -9,7 +9,7 @@ route.use(express.json());
 // -------- Ruta Productos y detalle ------------------
 
 route.get("/", (req, res) => {
-    Products.findAll()
+    Products.findAll({include:[Categories]})
     .then(r => {
         res.send(r)
     })
