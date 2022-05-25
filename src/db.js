@@ -31,10 +31,45 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Products, Categories } = sequelize.models;
 
-Products.hasMany(Categories);
-Categories.belongsTo(Products);
+const { Product, Category, User, ShoppingCar, Sales, Buy, PriceRange, Rol, PaymenthMethod,
+  CommercialInvoiceType, Cities, Province } = sequelize.models;
+
+Category.hasMany(Product);
+Product.belongsTo(Category);
+
+User.hasMany(ShoppingCar);
+ShoppingCar.belongsTo(User);
+
+Product.hasMany(ShoppingCar);
+ShoppingCar.belongsTo(Product);
+
+ShoppingCar.hasMany(Sales);
+Sales.belongsTo(ShoppingCar);
+
+Product.hasMany(Buy);
+Buy.belongsTo(Product);
+
+PriceRange.hasMany(Product);
+Product.belongsTo(PriceRange);
+
+Rol.hasMany(User);
+User.belongsTo(Rol);
+
+PaymenthMethod.hasMany(Sales);
+Sales.belongsTo(PaymenthMethod);
+
+CommercialInvoiceType.hasMany(Sales);
+Sales.belongsTo(CommercialInvoiceType);
+
+CommercialInvoiceType.hasMany(Buy);
+Buy.belongsTo(CommercialInvoiceType);
+
+Cities.hasMany(User);
+User.belongsTo(Cities);
+
+Province.hasMany(Cities);
+Cities.belongsTo(Province);
 
 
 // Aca vendrian las relaciones

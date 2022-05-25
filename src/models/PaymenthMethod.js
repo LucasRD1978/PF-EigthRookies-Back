@@ -2,13 +2,12 @@ const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) =>{
 
-    sequelize.define('category', {
-
-        name: {
+    sequelize.define('paymenthMethod', {
+        
+        method: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-      
-
+        }
+        
     })
 }

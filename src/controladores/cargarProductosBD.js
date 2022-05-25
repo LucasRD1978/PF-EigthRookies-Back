@@ -39,7 +39,7 @@ function cargarCeluraresEnBd(){
                    
                        description:e.title,
                        image:e.image,
-                        category:e.category,
+                        categoria:e.category,
                        price:e.price,
                        name:e.name
                       // id:e.id
@@ -56,11 +56,25 @@ function cargarCeluraresEnBd(){
                               })
                               
                             }
+                            aux1.map(async (e)=>{
+                                let p=await Products.findOne({where:{name:e.name}})
+                                let c=await Categories.findOrCreate({where:{name:e.category}})
+                                c[0].addProducts(p)
+                              //  p.addCategories(c[0])
+                                       // console.log('uniendo')
+                                        
+                                                
+                                            
+                                                                             
+                            
+                            })                    
                 console.log("categorias en celeulares en bd")
             })
           
 
-        .catch((err) => console.log(err))
+
+        .catch((err)=>console.log(err))
+
         }
 
 function cargarElectronicaEnDb(){    
@@ -96,7 +110,7 @@ function cargarElectronicaEnDb(){
                        where:{
                        description:e.title,
                        image:e.image,
-                       category:e.category,
+                       categoria:e.category.split('_').join('-'),
                        price:e.price,
                       // id:`${e.id}`
                         name:e.name
@@ -112,23 +126,36 @@ function cargarElectronicaEnDb(){
                                where:{name:e}
                               })
                             }
+               // console.log(aux1)
+                
+                      
                 console.log("categorias en electronica bd")
+
                     })
             
-     
+    .then(()=>{
+        aux1.map(async(e)=>
+                 {  let p=await Products.findOne({where:{name:e.name}})
+                    let c=await Categories.findOrCreate({where:{name:e.category.split('-').join('')}})
+                    console.log(e.category)
+                        if(p){
+                         c[0].addProducts(p)}
+                         else{console.log('no no')}
+                          //  console.log(c[0],c.length)
+                            
+                                    
+                                
+                                                                 
+                
+                })       
+
+    })                
    
    .catch((err)=>console.log(err))
 
 }
 
 
-async function unirTablas(){
-
-    let aux=[]
-    let r=await Products.findAll()
-    console.log(r.length)
-
-}
 
 
 
@@ -137,5 +164,5 @@ async function unirTablas(){
 
 
 
+module.exports={cargarCeluraresEnBd,cargarElectronicaEnDb}
 
-module.exports={cargarCeluraresEnBd,cargarElectronicaEnDb,unirTablas}

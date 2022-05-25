@@ -2,13 +2,11 @@ const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) =>{
 
-    sequelize.define('category', {
+    sequelize.define('province', {
 
-        name: {
+        province: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-      
-
+        }
     })
 }
