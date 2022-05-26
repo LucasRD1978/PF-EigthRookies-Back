@@ -2,7 +2,6 @@ const express = require('express');
 const {Products,Category} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
-const { Op } = require('sequelize');
 
 const route = express.Router();
 route.use(express.json());
@@ -22,26 +21,19 @@ route.get("/", (req, res,next) => {
 
 // -----------RUTA NAME ------------------------------
 // item.name.toLowerCase().includes(name.toLowerCase()))
-route.get('/search', async(req,res,next)=>{
+route.get('/buscar', async(req,res,next)=>{
     const {name} = req.query
-
     
     const  productNew = await Products.findOne({
-
         where: {
-            name: {
-                [Op.like] : '%'+name+'%'
-            }
+            name: name
         }
     })
-        if(productNew.length === 0){
-            res.status(400).send("Invalid name")
+        if(productNew.length !== 0){
+            res.json(productNew);
         } else {
-            res.send(productNew);
+            res.status(400).send({msg:"Name invalido"})
         }
-    } catch(error){
-        next(error);
-    }
     })
 
 // ----------RUTA ID DETALLE _________________________________
@@ -50,7 +42,7 @@ route.get("/:id", async (req, res, next) => {
     const {id} = req.params;
     try{
     const prodBuscado = await Products.findByPk(id)
-    if(!prodBuscado){
+    if(prodBuscado.length === 0){
 
         res.status(400).send("No se encontro la busqueda por id")
     } else {
@@ -63,7 +55,7 @@ route.get("/:id", async (req, res, next) => {
     
 
 })
-//que carajo te pasa git
+
 module.exports = route;
 
 /*
