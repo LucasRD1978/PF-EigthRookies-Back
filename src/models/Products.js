@@ -4,14 +4,24 @@ module.exports = (sequelize) =>{
 
     sequelize.define('products', {
 
+        id:{
+            type: DataTypes.STRING,
+            allowNull: false,
+           // autoIncrement: true,
+            primaryKey: true,
+            defaultValue: DataTypes.UUIDV4
+
+      
+        },
+        
         name: {
              type: DataTypes.STRING,
-             //allowNull: false
+             allowNull: false
          },
 
         description: {
             type: DataTypes.STRING,
-            //allowNull: false
+            allowNull: false
         },
 
         image:{
@@ -33,11 +43,18 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING,
             allowNull: true
         },
-        categoria:{
-            type:DataTypes.STRING,
+
+
+        // category: {
+        //     type: DataTypes.STRING
+        // },
+
+        price: {
+            type: DataTypes.FLOAT
         },
-        price:{
-            type:DataTypes.FLOAT
+
+        range_price: {
+            type: DataTypes.INTEGER
         }
 
     })
