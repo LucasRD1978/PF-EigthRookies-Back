@@ -55,7 +55,7 @@ route.get("/:id", async (req, res, next) => {
     
 
 })
-
+//que carajo te pasa git
 module.exports = route;
 
 /*
