@@ -32,26 +32,32 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 
+
 const { Products, Category, User, ShoppingCar, Sales, Buy, PriceRange, Rol, PaymenthMethod,
   CommercialInvoiceType, Cities, Province } = sequelize.models;
 
 Category.hasMany(Products);
 Products.belongsTo(Category);
 
+
 User.hasMany(ShoppingCar);
 ShoppingCar.belongsTo(User);
+
 
 Products.hasMany(ShoppingCar);
 ShoppingCar.belongsTo(Products);
 
+
 ShoppingCar.hasMany(Sales);
 Sales.belongsTo(ShoppingCar);
+
 
 Products.hasMany(Buy);
 Buy.belongsTo(Products);
 
 PriceRange.hasMany(Products);
 Products.belongsTo(PriceRange);
+
 
 Rol.hasMany(User);
 User.belongsTo(Rol);
