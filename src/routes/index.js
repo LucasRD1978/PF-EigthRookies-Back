@@ -6,7 +6,7 @@ const filtrar=require('./filtrar.js');
 const { route } = require('./routeProducts.js');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-
+const createProduct=require('./routeCrearProd.js')
 
 const router = Router();
 
@@ -16,6 +16,6 @@ router.use('/filtrar',filtrar)
 router.use('/ordenar',ordenar)
 router.use("/products", routeProd)
 router.use("/admin", routeAdmin)
-
+router.use('/createProduct',createProduct)
 
 module.exports = router;
