@@ -22,7 +22,7 @@ for(let i=0;i<10;i++){
             }
             ;console.log(aux1.length,'electronica');aux1=aux1.map(info=>
                 {aux2.push(info.domain_id.split('-')[1]);return {
-                    
+                    id:info.id,
                     title:info.title,
                     image:info.thumbnail,
                     category:info.domain_id.split('-')[1],
@@ -35,7 +35,8 @@ for(let i=0;i<10;i++){
                         where:{
                         description:e.title,
                         image:e.image,
-                        categoria:e.category,
+                        id:e.id,
+                       // categoria:e.category,
                         price:e.price,
                         name:e.name,
                     }})}
@@ -51,7 +52,7 @@ for(let i=0;i<10;i++){
 
             })
     
-        .then(()=>{asociar(aux1);console.log('ok')})    
+        .then(()=>{asociar(aux1);console.log('..ready')})    
     }
      
 

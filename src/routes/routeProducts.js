@@ -1,5 +1,5 @@
 const express = require('express');
-const {Products,Categories} =require('../db.js');
+const {Products,Category} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
 const { Op } = require('sequelize');
@@ -9,12 +9,12 @@ route.use(express.json());
 
 // -------- Ruta Productos y detalle ------------------
 
-route.get("/", (req, res) => {
-    Products.findAll({include:[Categories]})
+route.get("/", (req, res,next) => {
+    Products.findAll({include:[Category]})
     .then(r => {
         res.send(r)
     })
-    .catch((error) => {
+    .catch(() => {
         next();
     } )
 })
@@ -24,8 +24,10 @@ route.get("/", (req, res) => {
 // item.name.toLowerCase().includes(name.toLowerCase()))
 route.get('/search', async(req,res,next)=>{
     const {name} = req.query
-    try{
-    const  productNew = await Products.findAll({
+
+    
+    const  productNew = await Products.findOne({
+
         where: {
             name: {
                 [Op.like] : '%'+name+'%'
