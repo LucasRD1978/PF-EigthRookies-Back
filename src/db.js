@@ -23,7 +23,7 @@ fs.readdirSync(path.join(__dirname, '/models'))
 
 // Injectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach(model => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
+// Capitalizamos los nombres de los modelos ie: Products => Products
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
@@ -32,26 +32,26 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 
 
-const { Product, Category, User, ShoppingCar, Sales, Buy, PriceRange, Rol, PaymenthMethod,
+const { Products, Categories, User, ShoppingCar, Sales, Buy, PriceRange, Rol, PaymenthMethod,
   CommercialInvoiceType, Cities, Province } = sequelize.models;
 
-Category.hasMany(Product);
-Product.belongsTo(Category);
+Categories.hasMany(Products);
+Products.belongsTo(Categories);
 
 User.hasMany(ShoppingCar);
 ShoppingCar.belongsTo(User);
 
-Product.hasMany(ShoppingCar);
-ShoppingCar.belongsTo(Product);
+Products.hasMany(ShoppingCar);
+ShoppingCar.belongsTo(Products);
 
 ShoppingCar.hasMany(Sales);
-Sales.belongsTo(ShoppingCar);
+Sales.belongsTo(ShoppingCar); 
 
-Product.hasMany(Buy);
-Buy.belongsTo(Product);
+Products.hasMany(Buy);
+Buy.belongsTo(Products);
 
-PriceRange.hasMany(Product);
-Product.belongsTo(PriceRange);
+PriceRange.hasMany(Products);
+Products.belongsTo(PriceRange);
 
 Rol.hasMany(User);
 User.belongsTo(Rol);
@@ -73,9 +73,9 @@ Cities.belongsTo(Province);
 
 
 // Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+// Products.hasMany(Reviews);
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  ...sequelize.models, // para poder importar los modelos así: const { Products, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };
