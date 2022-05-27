@@ -7,6 +7,15 @@ const { Router } = require('express');
 const route = express.Router();
 route.use(express.json());
 
+route.get("/", async (req, res) => {
+    Category.findAll().
+    then(r => {
+        res.send(r)
+    }).catch((error) =>
+        next(error)
+    )
+})
+
 route.get("/:id", async (req, res, next) => {
     const {id} =req.params;
     try {
