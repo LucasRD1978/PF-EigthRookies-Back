@@ -4,6 +4,7 @@ const routeAdmin = require('./routeAdmin.js');
 const ordenar=require('./ordenar.js')
 const filtrar=require('./filtrar.js');
 const { route } = require('./routeProducts.js');
+const routeCategory = require('./routeCategory');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const createProduct=require('./routeCrearProd.js')
@@ -17,5 +18,6 @@ router.use('/ordenar',ordenar)
 router.use("/products", routeProd)
 router.use("/admin", routeAdmin)
 router.use('/createProduct',createProduct)
+router.use('/category',routeCategory)
 
 module.exports = router;
