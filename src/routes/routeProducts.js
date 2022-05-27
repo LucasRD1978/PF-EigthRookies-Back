@@ -28,7 +28,7 @@ route.get('/search', async(req,res,next)=>{
     const  productNew = await Products.findAll({
         where: {
             name: {
-                [Op.iLike]: '%'+name+'%'
+                [Op.iLike]: '%'+`${name.split(' ').join('-')}`+'%'
             }
         }, include: [Category]
     })
