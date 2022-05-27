@@ -2,11 +2,12 @@ const express = require('express');
 const {Products,Category} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
+const {Op} = require('sequelize');
 
 const route = express.Router();
 route.use(express.json());
 
-// -------- Ruta Productos y detalle ------------------
+// -------- RUTA PRODUCTOS ------------------
 
 route.get("/", (req, res,next) => {
     Products.findAll({include:[Category]})
@@ -19,37 +20,46 @@ route.get("/", (req, res,next) => {
 })
 
 
-// -----------RUTA NAME ------------------------------
-// item.name.toLowerCase().includes(name.toLowerCase()))
-route.get('/buscar', async(req,res,next)=>{
+// -----------RUTA NAME "CASE INSENSITIVE "------------------------------
+
+route.get('/search', async(req,res,next)=>{
     const {name} = req.query
-    
-    const  productNew = await Products.findOne({
+    try{
+    const  productNew = await Products.findAll({
         where: {
-            name: name
-        }
+            name: {
+                [Op.iLike]: '%'+name+'%'
+            }
+        }, include: [Category]
     })
-        if(productNew.length !== 0){
-            res.json(productNew);
+        if(productNew.length === 0){
+            res.status(400).send({msg:`there are no results for the ${name} search`})
         } else {
-            res.status(400).send({msg:"Name invalido"})
+            res.send(productNew);
         }
+    }catch(error){
+        next(error)
+    }
     })
 
 // ----------RUTA ID DETALLE _________________________________
 
-route.get("/:id", async (req, res, next) => {
+route.get("/:id", async (req, res) => {
     const {id} = req.params;
     try{
-    const prodBuscado = await Products.findByPk(id)
-    if(prodBuscado.length === 0){
+    const prodBuscado = await Products.findOne({
+        where: {
+            id: id
+        }, include: [Category]
+    })
+    if(!prodBuscado){
 
-        res.status(400).send("No se encontro la busqueda por id")
+        res.status(400).send({msg:"the searched ID did not return any results"})
     } else {
         res.send(prodBuscado)
     }
 } catch(error){
-    console.log("No se encontro el ID")
+    console.log("ID not found")
     next(error)
 }
     
