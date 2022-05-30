@@ -18,9 +18,4 @@ route.put('/:numeroPagina',(req,res,next)=>{
 
 
 
-
-
-
-
-
 module.exports=route
