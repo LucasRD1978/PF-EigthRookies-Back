@@ -7,6 +7,7 @@ const route = Router()
 route.put('/:page',(req,res,next)=>{
     //const category=''
     //const price=''
+    //console.log(rteq.body)
     const{page}=req.params
     const{category,price}=req.body
     if(category&&price){
