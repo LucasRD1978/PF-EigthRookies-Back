@@ -70,15 +70,18 @@ route.get(
   //     : { _id: -1 };
   
 
-      const products = await Category.findAll({
-          where: {
-          ...queryFilter,
-          ...categoryFilter,
-          // ...priceFilter,
-          // ...ratingFilter, 
-      }, offset: (pageSize * (page - 1)),
-          limit: 8,
-          subQuery:false, include: [Products],
+      const products = await Products.findAll({
+        // where: {
+        //   // ...queryFilter,
+        //   // ...priceFilter,
+        //   // ...ratingFilter,
+        // },
+        offset: (pageSize * (page - 1)),
+        limit: 8,
+        include: [{
+          model:Category,
+          where: {...categoryFilter,},
+        }]
         })
 
 
@@ -90,7 +93,7 @@ route.get(
               // ...ratingFilter,
               },include: [Products], 
             })
-          
+          console.log(countProducts.count)
   try {
       res.send({
           products,
