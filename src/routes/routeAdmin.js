@@ -1,5 +1,5 @@
 const express = require('express');
-const {Products, Category} =require('../db.js');
+const {User} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
 
@@ -7,23 +7,33 @@ const route = express.Router();
 route.use(express.json());
 
 //-------RUTA CREACIÖN---------------------------------
+route.get("/", (req, res) => {
+    User.findAll()
+    .then(r => {
+        res.send(r)
+    })
+    .catch(() => {
+        next();
+    } )
+})
+
+
 route.post("/", async (req, res) => {
-    const {name, description, price, image1, categories} = req.body;
-    if(!name || !price){
-        return res.json({msg:"The name, description and the price are required to create a new product"})
+    try{
+    let {email, first_name, last_name ,image, password, phone, postal_code, address, admin } = req.body;
+    if(!email || !first_name || !last_name){
+        return res.json({msg:"The name, surname and the mail are required to create a new user"})
     }
 
-    const prodCreated = await Products.create({name, description, price, image1
+    let nameCreated = await User.create({email, first_name, last_name ,image, password, phone, postal_code, address, admin
     })
-
-    let categoryDb = await Category.findAll({
-        where: {
-            name: categories
-        }
-    })
-    prodCreated.addCategory(categoryDb);
-
-    res.send("A new product was created")
+    if(nameCreated !== 0){
+    return res.status(200).send({msg:"A new user was created"})
+    }
+} catch(error){
+    //console.log(error)
+    res.status(400).send({msg:"Error creating a user"})
+}
 })
 
 module.exports = route;
