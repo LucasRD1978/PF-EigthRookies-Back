@@ -4,14 +4,7 @@ module.exports = (sequelize) => {
 
     sequelize.define('user', {
 
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            allowNull: false,
-            primaryKey: true,
-          },
-    
-        email: {
+       email: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -50,7 +43,9 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-
+         idRol: {
+             type: DataTypes.INTEGER
+         }
         // admin: {
         //     type: DataTypes.BOOLEAN,
         //     defaultValue: false,
