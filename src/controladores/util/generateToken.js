@@ -6,6 +6,7 @@ const {
   } = process.env
 
 const generateAccessToken = (user) => {
+    
     try{
     const token = jwt.sign({user}, jwtSecret, {expiresIn: '30m'});
     return token;

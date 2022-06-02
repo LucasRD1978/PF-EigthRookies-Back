@@ -1,8 +1,9 @@
 const jwt = require ('jsonwebtoken');
 require("dotenv").config();
 const {jwtSecret} = process.env
+const {User} = require('../../models/User');
 
-module.exports = function (req, res, next){
+module.exports = async function (req, res, next){
     try{
     const token = req.header('token')
 
@@ -10,15 +11,19 @@ module.exports = function (req, res, next){
         return res.status(403).json('Not Authorized')
     }
 
-    const jw =  jwt.veryfy(token, jwtSecret)
+    const jw =  jwt.verify(token, jwtSecret)
     
     req.user = jw.user
 
-    next()
+    console.log(req.user)
+     if(req.user.idRol === 2) return next();
+     else return res.status(403).send("Fuera de aqui intruso");
+      
+    //next()
     
-    }
+}
     catch (error){
-        return res.satus(410).json('Not Authorized')
+        return res.status(403).json('Not Authorized')
     }  
     
 

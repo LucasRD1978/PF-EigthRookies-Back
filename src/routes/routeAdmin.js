@@ -35,6 +35,7 @@ route.post("/register", async (req, res) => {
     }
 
     const user = await User.findOne({where: {email: email}})
+    //console.log(user)
 
     if(user) {
         return res.status(401).send('User already exist')
