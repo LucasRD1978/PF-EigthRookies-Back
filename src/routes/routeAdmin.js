@@ -50,7 +50,7 @@ route.post("/register", async (req, res) => {
     let nameCreated = await User.create({email, first_name, last_name ,image, bcryptPassword, phone, postal_code, address, idRol
     })
     
-    const token = generatorToken(nameCreated);
+        const token = generatorToken(nameCreated, idRol);
     res.json({token});
 
     

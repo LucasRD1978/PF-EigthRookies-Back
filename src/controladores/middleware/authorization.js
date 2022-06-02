@@ -19,11 +19,10 @@ module.exports = async function (req, res, next){
      if(req.user.idRol === 2) return next();
      else return res.status(403).send("Fuera de aqui intruso");
       
-    //next()
-    
-}
-    catch (error){
+ } catch (error){
+
         return res.status(403).json('Not Authorized')
+
     }  
     
 
