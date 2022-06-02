@@ -6,8 +6,11 @@ const authorization = require('../controladores/middleware/authorization')
 const route = Router()
 
 
-route.post('/', authorization, async (req, res, next) => {
-    const{name,price, description,image,image2,image3, image4,category}=req.body
+route.post('/',async(req,res,next)=>{
+    let{name,price, description,image,image2,image3, image4,category}=req.body
+    if(!image2){image2=""}
+    if(!image3){image3=""}
+    if(!image4){image4=""}
 
     try{
     let p=await Products.findOrCreate({
