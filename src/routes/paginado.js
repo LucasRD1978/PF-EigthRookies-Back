@@ -37,6 +37,7 @@ route.get(
     //       },
     //     }
     //   : {};
+
   const categoryFilter = category && category !== 'all' ? { id: category } : {};
 
   // const ratingFilter =
@@ -94,7 +95,6 @@ route.get(
             }],
           ...sortOrder,
           })
-        {console.log("soy countProducts.count", countProducts.count)}
   try {
       res.send({
           products,
