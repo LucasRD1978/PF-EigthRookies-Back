@@ -1,10 +1,13 @@
 const jwt = require ('jsonwebtoken');
-
-require ('dotenv').config();
+//comentario
+require('dotenv').config();
+const {
+    jwtSecret
+  } = process.env
 
 const generateAccessToken = (user) => {
     try{
-    const token = jwt.sing({user}, procces.env.jwtSecret, {expired: '30m'});
+    const token = jwt.sign({user}, jwtSecret, {expiresIn: '30m'});
     return token;
     }
     catch(err){
