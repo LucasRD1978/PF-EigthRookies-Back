@@ -1,6 +1,6 @@
 const jwt = require ('jsonwebtoken');
 require("dotenv").config();
-const {jwtSecret} = process.env
+const { jwtAdmin } = process.env
 
 module.exports = function (req, res, next){
     try{
@@ -10,7 +10,7 @@ module.exports = function (req, res, next){
         return res.status(403).json('Not Authorized')
     }
 
-    const jw =  jwt.verify(token, jwtSecret)
+        const jw = jwt.verify(token, jwtAdmin)
     
     req.user = jw.user
 
@@ -18,7 +18,7 @@ module.exports = function (req, res, next){
     
     }
     catch (error){
-        return res.satus(410).json('Not Authorized')
+        return res.status(410).json('Not Authorized')
     }  
     
 
