@@ -4,6 +4,7 @@ const axios = require('axios');
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const generatorToken = require('../controladores/util/generateToken.js')
+const authorization = require('../controladores/middleware/authorization')
 
 //otros comments
 
@@ -12,7 +13,8 @@ route.use(express.json());
 
 //------------------------------ROUTE USER LIST  -----------------
 
-route.get("/userList", (req, res) => {
+route.get("/userList", authorization, (req, res) => {
+    
     User.findAll({
         include: 'scope'
     })
