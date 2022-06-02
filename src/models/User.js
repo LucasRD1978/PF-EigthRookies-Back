@@ -3,8 +3,8 @@ const {DataTypes} = require('sequelize');
 module.exports = (sequelize) => {
 
     sequelize.define('user', {
-    
-        email: {
+
+       email: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -19,13 +19,23 @@ module.exports = (sequelize) => {
             allowNull: false
         },
 
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+
+        password: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+
         phone: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true
         },
 
         postal_code:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true
         },
 
@@ -33,7 +43,13 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-
-        
+         idRol: {
+             type: DataTypes.INTEGER
+         }
+        // admin: {
+        //     type: DataTypes.BOOLEAN,
+        //     defaultValue: false,
+        //     allowNull: false,
+        // }
     })
 }
