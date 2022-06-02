@@ -10,7 +10,7 @@ module.exports = function (req, res, next){
         return res.status(403).json('Not Authorized')
     }
 
-    const jw =  jwt.veryfy(token, jwtSecret)
+    const jw =  jwt.verify(token, jwtSecret)
     
     req.user = jw.user
 
