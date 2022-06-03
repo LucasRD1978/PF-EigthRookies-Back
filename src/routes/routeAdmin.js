@@ -1,5 +1,5 @@
 const express = require('express');
-const {User, Rol, Cities} =require('../db.js');
+const {User, Rol, Cities, ShoppingCar} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
@@ -29,29 +29,38 @@ route.get("/userList", authorization, (req, res) => {
 
 route.post("/register", async (req, res) => {
     try{
-    let {email, first_name, last_name ,image, password, phone, postal_code, address, idRol } = req.body;
+    let {email, first_name, last_name ,image, phone, postal_code, address, idRol } = req.body;
     if(!email || !first_name){
         return res.json({msg:"The name and the email are required to create a new user"})
     }
 
-    const user = await User.findOne({where: {email: email}})
+    const user = await User.findOne({
+    
+        where: {
+            email: email
+        },
+         include:{
+             model: ShoppingCar
+         }})
     //console.log(user)
 
-    if(user) {
-        return res.status(401).send('User already exist')
+    if(!user) {
+        let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address, idRol
+        })
+        const token = generatorToken(nameCreated, idRol);
+        res.json({token});
+    } else {
+        const token = generatorToken(user, idRol);
+        return res.status(201).json({token, user})
     }
 
     //const salt = await bcrypt.genSalt(10);
     //const bcryptPassword = await bcrypt.hash(password, salt);
-    const saltRound = 10;
-        const salt = await bcrypt.genSalt(saltRound);
-        const bcryptPassword = await bcrypt.hash(password, salt);
+    // const saltRound = 10;
+    //     const salt = await bcrypt.genSalt(saltRound);
+    //     const bcryptPassword = await bcrypt.hash(password, salt);
 
-    let nameCreated = await User.create({email, first_name, last_name ,image, bcryptPassword, phone, postal_code, address, idRol
-    })
     
-        const token = generatorToken(nameCreated, idRol);
-    res.json({token});
 
     
 } catch(error){
