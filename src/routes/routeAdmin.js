@@ -60,9 +60,6 @@ route.post("/register", async (req, res) => {
     //     const salt = await bcrypt.genSalt(saltRound);
     //     const bcryptPassword = await bcrypt.hash(password, salt);
 
-    
-
-    
 } catch(error){
     console.log(error)
     res.status(400).send({msg:"Error creating a user"})
