@@ -1,20 +1,17 @@
 const {Products, Category} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
+const authorization = require('../controladores/middleware/authorization')
 
 const route = Router()
 
 
 route.post('/',async(req,res,next)=>{
-    const{name,price, description,image,image2,image3, image4,category}=req.body
-    // let name="kuka Maraca"
-    // let description='algo'
-    // let image=''
-    // let price=2
-    // let category=1
-    // let image2=''
-    // let image3=''
-    // let image4=''
+    let{name,price, description,image,image2,image3, image4,category}=req.body
+    if(!image2){image2=""}
+    if(!image3){image3=""}
+    if(!image4){image4=""}
+
     try{
     let p=await Products.findOrCreate({
         where:{
