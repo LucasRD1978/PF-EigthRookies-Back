@@ -15,15 +15,12 @@ module.exports = async function (req, res, next){
     
     req.user = jw.user
 
-    console.log(req.user)
+    //console.log(req.user)
      if(req.user.idRol === 2) return next();
-     else return res.status(403).send("Fuera de aqui intruso");
+     else return res.status(403).send("Area reservada para personal autorizado");
       
- } catch (error){
+    } catch (error){
 
         return res.status(403).json('Not Authorized')
-
     }  
-    
-
 }
