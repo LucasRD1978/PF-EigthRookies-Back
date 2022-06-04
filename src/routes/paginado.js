@@ -1,6 +1,7 @@
 const {Products, Category} =require('../db.js');
 const axios = require('axios');
 const { Router } = require('express');
+const{Op}=require('sequelize')
 
 const route = Router()
 
@@ -22,20 +23,21 @@ route.get(
       const pageSize = query.pageSize || 8;
       const page = query.page || 1;
       const category = query.category || '';
-      // const price = query.price || '';
+      const price = query.price || '';
       // const rating = query.rating || '';
-      // const order = query.order || '';
-      const searchQuery = query.query || '';
+      const order = query.order || '';
+      // const searchQuery = query.query || '';
 
 
-      const queryFilter =
-    searchQuery && searchQuery !== 'all'
-      ? {
-          name: {
-            [Sequelize.Op.iLike]: `%` + {searchQuery} + `%`,
-          },
-        }
-      : {};
+    //   const queryFilter =
+    // searchQuery && searchQuery !== 'all'
+    //   ? {
+    //       name: {
+    //         [Sequelize.Op.iLike]: `%` + {searchQuery} + `%`,
+    //       },
+    //     }
+    //   : {};
+
   const categoryFilter = category && category !== 'all' ? { id: category } : {};
 
   // const ratingFilter =
@@ -46,54 +48,53 @@ route.get(
   //         },
   //       }
   //     : {};
-  // const priceFilter =
-  //   price && price !== 'all'
-  //     ? {
-  //         // 1-50
-  //         price: {
-  //         [Op.gt]: Number(price.split('-')[0]),
-  //         [Op.lt]: Number(price.split('-')[1]),
-  //         },
-  //       }
-  //     : {};
-  // const sortOrder =
-  //   order === 'featured'
-  //     ? { featured: -1 }
-  //     : order === 'lowest'
-  //     ? { price: 1 }
-  //     : order === 'highest'
-  //     ? { price: -1 }
-  //     : order === 'toprated'
-  //     ? { rating: -1 }
-  //     : order === 'newest'
-  //     ? { createdAt: -1 }
-  //     : { _id: -1 };
-  
+  const priceFilter =
+  price && price !== '' 
+  ? { price: {[Op.lte]: Number(price) ,
+          },
+        } 
+      : {} ;
+
+
+  const sortOrder =
+    order === 'A-Z'
+      ? {order:[["name","ASC"]]}
+      : order === 'Z-A'
+      ? {order:[["name","DESC"]]}
+      : order === 'ASC'
+      ? {order:[["price","ASC"]]}
+      : order === 'DESC'
+      ? {order:[["price","DESC"]]}:
+      {}
+      
 
       const products = await Products.findAll({
-        // where: {
-        //   // ...queryFilter,
-        //   // ...priceFilter,
-        //   // ...ratingFilter,
-        // },
+      
+        where: {
+          // ...queryFilter,
+          ...priceFilter,
+          // ...ratingFilter,
+        },
         offset: (pageSize * (page - 1)),
         limit: 8,
         include: [{
           model:Category,
           where: {...categoryFilter,},
-        }]
+        }],
+        ...sortOrder,
         })
 
 
-          const countProducts = await Category.findAndCountAll({
-          where:{
-              ...queryFilter,
-              ...categoryFilter,
-              // ...priceFilter,
-              // ...ratingFilter,
-              },include: [Products], 
-            })
-          console.log(countProducts.count)
+          const countProducts = await Products.findAndCountAll({
+            where: {
+              ...priceFilter,
+            },
+            include: [{
+              model:Category,
+              where: {...categoryFilter,},
+            }],
+          ...sortOrder,
+          })
   try {
       res.send({
           products,

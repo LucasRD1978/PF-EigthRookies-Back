@@ -10,6 +10,8 @@ const paginado=require('./paginado.js')
 // Ejemplo: const authRouter = require('./auth.js');
 const createProduct=require('./routeCrearProd.js')
 const nuevaRuta=require('./nuevaRuta')
+const routeUpdateProduct=require('./routeUpdateProduct')
+const routeCrearCategory=require('./routeCrearCategory') 
 const router = Router();
 
 // Configurar los routers
@@ -22,6 +24,6 @@ router.use('/createProduct',createProduct)
 router.use('/category',routeCategory)
 router.use('/paginado',paginado)
 router.use('/nuevaruta',nuevaRuta)
-
-
+router.use('/updateproduct',routeUpdateProduct)
+router.use('/crearcategory',routeCrearCategory)
 module.exports = router;
