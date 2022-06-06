@@ -71,8 +71,9 @@ User.belongsTo(Cities);
 Province.hasMany(Cities);
 Cities.belongsTo(Province);
 
-Order.belongsTo(User);
 User.hasMany(Order);
+Products.hasMany(Order)
+Order.belongsTo(User)
 
 
 // Aca vendrian las relaciones
