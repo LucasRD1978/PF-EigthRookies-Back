@@ -26,18 +26,17 @@ route.get(
       const price = query.price || '';
       // const rating = query.rating || '';
       const order = query.order || '';
-      // const searchQuery = query.query || '';
+      const searchQuery = query.query || '';
 
-
-    //   const queryFilter =
-    // searchQuery && searchQuery !== 'all'
-    //   ? {
-    //       name: {
-    //         [Sequelize.Op.iLike]: `%` + {searchQuery} + `%`,
-    //       },
-    //     }
-    //   : {};
-
+      const queryFilter =
+    searchQuery && searchQuery !== 'all'
+      ? {
+        name: {
+          [Op.iLike]: '%'+`${searchQuery.split(' ').join('-')}`+'%'
+      }
+        }
+      : {};
+    
   const categoryFilter = category && category !== 'all' ? { id: category } : {};
 
   // const ratingFilter =
@@ -71,7 +70,7 @@ route.get(
       const products = await Products.findAll({
       
         where: {
-          // ...queryFilter,
+          ...queryFilter,
           ...priceFilter,
           // ...ratingFilter,
         },
@@ -87,6 +86,7 @@ route.get(
 
           const countProducts = await Products.findAndCountAll({
             where: {
+              ...queryFilter,
               ...priceFilter,
             },
             include: [{
@@ -95,6 +95,7 @@ route.get(
             }],
           ...sortOrder,
           })
+
   try {
       res.send({
           products,
