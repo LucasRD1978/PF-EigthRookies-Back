@@ -53,8 +53,8 @@ Buy.belongsTo(Products);
 PriceRange.hasMany(Products);
 Products.belongsTo(PriceRange);
 
-Rol.hasMany(User);
-User.belongsTo(Rol);
+Rol.hasMany(User, {foreignKey: 'idRol'});
+User.belongsTo(Rol, {as: 'scope' ,foreignKey: 'idRol'});
 
 PaymenthMethod.hasMany(Sales);
 Sales.belongsTo(PaymenthMethod);

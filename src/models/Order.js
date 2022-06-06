@@ -8,9 +8,6 @@ module.exports = (sequelize) => {
         'inCart',
         'pending',
         'finished',
-        'preparing',
-        'onDelivery',
-        'delivered',
         'cancelled'
       ),
       allowNull: false,
@@ -24,29 +21,29 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    // serverPurchaseDate: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // localPurchaseDate: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // serverDeliverDate: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // localDeliverDate: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // serverCancelDate: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
-    // localCancelDate: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
+    serverPurchaseDate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    localPurchaseDate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    serverDeliverDate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    localDeliverDate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    serverCancelDate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    localCancelDate: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 };
