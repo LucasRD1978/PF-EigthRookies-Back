@@ -26,7 +26,8 @@ route.get(
       const price = query.price || '';
       // const rating = query.rating || '';
       const order = query.order || '';
-      // const searchQuery = query.query || '';
+      const searchQuery = query.search || '';
+      console.log(searchQuery);
 
 
     //   const queryFilter =
