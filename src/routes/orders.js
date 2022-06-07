@@ -34,8 +34,9 @@ route.get('', async (req, res) =>{
     }
   });
 
-  module.exports = route;
-const { Order, User, Products } = require('../../db.js');
+module.exports = route;
+  
+/* const { Order, User, Products } = require('../../db.js');
 
 const createOrder = async (status, amount, user, productId) => {
   try {
@@ -74,4 +75,4 @@ const createOrder = async (status, amount, user, productId) => {
   }
 };
 //order model 
-module.exports = createOrder;
+module.exports = createOrder; */
