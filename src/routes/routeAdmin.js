@@ -29,7 +29,7 @@ route.get("/userList", authorization, (req, res) => {
 
 route.post("/register", async (req, res) => {
     try{
-    let {email, first_name, last_name ,image, phone, postal_code, address, idRol } = req.body;
+    let {email, first_name, last_name ,image, phone, postal_code, address } = req.body;
     if(!email || !first_name){
         return res.json({msg:"The name and the email are required to create a new user"})
     }
@@ -45,12 +45,12 @@ route.post("/register", async (req, res) => {
     //console.log(user)
 
     if(!user) {
-        let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address, idRol
+        let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address
         })
-        const token = generatorToken(nameCreated, idRol);
-        res.json({token});
+        const token = generatorToken(nameCreated);
+        res.json({token, nameCreated});
     } else {
-        const token = generatorToken(user, idRol);
+        const token = generatorToken(user);
         return res.status(201).json({token, user})
     }
 
