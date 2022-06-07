@@ -24,7 +24,7 @@ for(let i=0;i<10;i++){
                 {aux2.push(info.domain_id.split('-')[1]);return {
                     id:info.id,
                     title:info.title,
-                    image:info.thumbnail,
+                    image:`https://http2.mlstatic.com/D_NQ_NP_${info.thumbnail_id}-O.webp`,
                     category:info.domain_id.split('-')[1],
                     price:info.price,
                     name:info.title.split(' ').slice(0,3).join('-')
