@@ -35,9 +35,9 @@ route.get('', async (req, res) =>{
   });
 
   module.exports = route;
-const { Order, User, Products } = require('../../db.js');
+const { Order, User, Products } = require('../db');
 
-const createOrder = async (status, amount, user, productId) => {
+const createOrders = async (status, amount, user, productId) => {
   try {
     const foundUser = await User.findOne({ where: { id: user.id } });
     const foundProduct = await Products.findOne({ where: { id: productId } });
@@ -74,4 +74,4 @@ const createOrder = async (status, amount, user, productId) => {
   }
 };
 //order model 
-module.exports = createOrder;
+module.exports = createOrders;
