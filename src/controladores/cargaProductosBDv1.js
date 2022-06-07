@@ -36,7 +36,7 @@ for(let i=0;i<10;i++){
                         description:e.title,
                         image:e.image,
                         id:e.id,
-                       // categoria:e.category,
+                        amount:10,
                         price:e.price,
                         name:e.name,
                     }})}

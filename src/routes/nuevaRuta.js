@@ -14,8 +14,8 @@ route.put('/:page',(req,res,next)=>{
     Products.findAll({
             where:{price:{ [Op.gt]:[price*1],
                 [Op.lt]:[price*1+5000]}},
-                offset:page+6,
-                limit:6,
+                offset:page*10+10,
+                limit:10,
                 include:[{
                 model:Category,
                 where:{id:category*1}
@@ -26,8 +26,8 @@ route.put('/:page',(req,res,next)=>{
     else if(category&&!price){
         Products.findAll({
             include:[{
-                offset:page+6,
-                limit:6,
+                offset:page*10+10,
+                limit:10,
                 model:Category,
                 where:{id:category*1}
             }]
@@ -37,8 +37,8 @@ route.put('/:page',(req,res,next)=>{
     }
     else if(!category&&price){
         Products.findAll({
-            offset:page+6,
-            limit:6,                             
+            offset:page*10+10,
+            limit:10,                             
             where:{price:{[Op.gt]:[price*1-5000],
                 [Op.lt]:[price*1+5000]}}
         })
@@ -46,8 +46,8 @@ route.put('/:page',(req,res,next)=>{
         .catch(()=>next())
     } 
     Products.findAll({
-        offset:page+6,
-        limit:6,                                                                                                                
+        offset:page*10+10,
+        limit:10,                                                                                                                
     })
     .then((r)=>{return res.status(200).send(r)})
     .catch(()=>next())                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

@@ -6,7 +6,8 @@ module.exports = (sequelize) => {
     
         email: {
             type: DataTypes.STRING,
-            allowNull: false
+            primaryKey:true,
+            
         },
         
        first_name: {
@@ -33,6 +34,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
+        functions:{
+            type:DataTypes.STRING,
+            defaultValue:'usuario'
+        }
 
         
     })

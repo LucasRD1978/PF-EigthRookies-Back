@@ -53,7 +53,7 @@ module.exports = (sequelize) =>{
             type: DataTypes.FLOAT
         },
 
-        range_price: {
+        amount: {
             type: DataTypes.INTEGER
         }
 
