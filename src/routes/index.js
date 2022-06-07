@@ -13,6 +13,8 @@ const createProduct=require('./routeCrearProd.js')
 const nuevaRuta=require('./nuevaRuta')
 const routeUpdateProduct=require('./routeUpdateProduct')
 const routeCrearCategory=require('./routeCrearCategory') 
+const routeUpDateSatock=require('./routeUpDateStock')
+const routeUsers=require('./routeUsers')
 const router = Router();
 
 // Configurar los routers
@@ -28,4 +30,6 @@ router.use('/nuevaruta',nuevaRuta)
 router.use('/order', orders);
 router.use('/updateproduct',routeUpdateProduct)
 router.use('/crearcategory',routeCrearCategory)
+router.use('/stock',routeUpDateSatock)
+router.use('/users',routeUsers)
 module.exports = router;
