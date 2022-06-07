@@ -3,7 +3,9 @@ const { conn, Rol } = require('./src/db.js');
 const {usuariosDb} = require('./src/controladores/usuarios');
 //const{cargarElectronicaEnDb,cargarCeluraresEnBd}=require('./src/controladores/cargarProductosBD')
 // Syncing all the models at once.
-const{CargarTodo}=require('./src/controladores/cargaProductosBDv1');
+
+const{CargarTodo}=require('./src/controladores/cargaProductosBDv1')
+const{cargarUsuario,arrObj}=require('./src/controladores/cargarAdmin')
 
   conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => { 
@@ -11,9 +13,10 @@ const{CargarTodo}=require('./src/controladores/cargaProductosBDv1');
   //cargarCeluraresEnBd();
   //cargarElectronicaEnDb();
   CargarTodo()
-  //cargaUsuario()
-  
-    usuariosDb()
+
+  cargarUsuario(arrObj)
+    
+
   });
   
 });

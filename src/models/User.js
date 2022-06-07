@@ -6,7 +6,8 @@ module.exports = (sequelize) => {
 
        email: {
             type: DataTypes.STRING,
-            allowNull: false
+            primaryKey:true,
+            
         },
         
        first_name: {
@@ -43,13 +44,13 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true
         },
-         idRol: {
-             type: DataTypes.INTEGER
-         }
-        // admin: {
-        //     type: DataTypes.BOOLEAN,
-        //     defaultValue: false,
-        //     allowNull: false,
-        // }
+
+        functions:{
+            type:DataTypes.STRING,
+            defaultValue:'usuario'
+        }
+
+        
+
     })
 }
