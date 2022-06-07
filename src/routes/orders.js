@@ -1,7 +1,9 @@
 
 const { Router } = require('express');
 const createOrder = require('../controladores/orders/createOrder.js');
+const deleteOrder = require('../controladores/orders/deleteOrder.js');
 const getProductsOrder = require('../controladores/orders/getProductsOrder.js')
+
 
 const route = Router()
 
@@ -59,6 +61,20 @@ route.get('', async (req, res) =>{
         return res.send(cart);
       }
     res.send({ error: "couldn't find orders" });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  route.delete('/:id', async function (req, res) {
+    try {
+      const { id } = req.params;
+
+      const orderDeleted = await deleteOrder(id);
+      if (orderDeleted) {
+        return res.send({ msg: 'order deleted' });
+      }
+      return res.send({ error: "couldn't find order" });
     } catch (err) {
       console.log(err);
     }
