@@ -14,16 +14,46 @@ route.post("", async(req, res) => {
         } else if (created) {
         return res.send({ msg: 'order created' });
         }
-     res.send({ error: "couldn't create order" });
+    return res.send({ error: "couldn't create order" });
     } catch (error) {
         console.log(error)
     }
 })
 
+route.put('/:id', async function (req, res) {
+  try {
+    const { status, amount, date, purchaseId } = req.body;
+    const { id } = req.params;
+    if (status) {
+      const orderChanged = await changeOrderStatus(
+        id,
+        status,
+        date,
+        purchaseId
+      );
+      if (typeof orderChanged !== 'boolean') {
+        return res.send(orderChanged);
+      } else if (orderChanged) {
+        return res.send({ msg: 'status changed' });
+      }
+    } else if (amount) {
+      const orderChanged = await changeOrderAmount(id, amount);
+      if (typeof orderChanged !== 'boolean') {
+        return res.send(orderChanged);
+      } else if (orderChanged) {
+        return res.send({ msg: 'amount changed' });
+      }
+    }
+
+    return res.send({ error: "couldn't edit order" });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 route.get('', async (req, res) =>{
     try {
     const { status } = req.query;
-    console.log("hola soy status por query",status)
       const cart = await getProductsOrder(status);
       if (cart) {
         return res.send(cart);
@@ -35,43 +65,3 @@ route.get('', async (req, res) =>{
   });
 
   module.exports = route;
-const { Order, User, Products } = require('../../db.js');
-
-const createOrder = async (status, amount, user, productId) => {
-  try {
-    const foundUser = await User.findOne({ where: { id: user.id } });
-    const foundProduct = await Products.findOne({ where: { id: productId } });
-    if (foundUser && foundProduct) {
-      if (status === 'finished' || status === 'pending') {
-        // if (foundProduct.stock < amount) {
-        //   return { error: "There's not enough stock." };
-        // }
-      }
-      const existingOrder = await Order.findOne({
-        where: { userId: user.id, productId: productId, status: status },
-      });
-      if (!existingOrder) {
-        const newOrder = await Order.create({
-          status: status,
-          amount: amount,
-        });
-        await foundUser.addOrder(newOrder);
-        await foundProduct.addOrder(newOrder);
-      } else {
-        existingOrder.amount = existingOrder.amount + Number(amount);
-        await existingOrder.save();
-      }
-      if (status === 'finished') {
-        foundProduct.stock = foundProduct.stock - Number(amount);
-        foundProduct.save();
-      }
-      return true;
-    }
-    return false;
-  } catch (error) {
-    console.log(error);
-    return false;
-  }
-};
-//order model 
-module.exports = createOrder;

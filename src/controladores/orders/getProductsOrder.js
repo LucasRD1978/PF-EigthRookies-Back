@@ -6,17 +6,18 @@ const {Op} = Sequelize.Op
 const getProductsOrder = async (status) => {
   try {
     console.log("soy status", status)
+    let whereStatement = { where: { status: status}}
+    console.log("soy whereStatement", whereStatement)
     const inCartProducts = await Products.findAll({
-      attributes: ['name', 'id', "price", 'description', "categoryId"],
+      attributes: ['name', 'id', "price", 'description', "image"],
       include: [
         {
           model: Order,
-          ...status,
-          as: 'orders',
+          ...whereStatement,
         },
         {
           model: Category,
-          attributes: ["name"]
+          attributes: ["name"],
         },
       ],
     });
