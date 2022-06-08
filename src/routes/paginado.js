@@ -26,22 +26,7 @@ route.get(
       const price = query.price || '';
       // const rating = query.rating || '';
       const order = query.order || '';
-<<<<<<< HEAD
-      const searchQuery = query.search || '';
-      console.log(searchQuery);
-
-
-    //   const queryFilter =
-    // searchQuery && searchQuery !== 'all'
-    //   ? {
-    //       name: {
-    //         [Sequelize.Op.iLike]: `%` + {searchQuery} + `%`,
-    //       },
-    //     }
-    //   : {};
-=======
       const searchQuery = query.query || '';
->>>>>>> 37929e935506cc293233b56672dfa337ff8fd721
 
       const queryFilter =
     searchQuery && searchQuery !== 'all'
