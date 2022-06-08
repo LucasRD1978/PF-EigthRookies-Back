@@ -12,10 +12,30 @@ const arrObj=[
 
     },
     {
-        email:'algunocualquiera@gmail.com',
-        first_name:'pablito',
-        last_name:'marmol',
+    email:'berrfarias@gmail.com',
+    first_name:'bernardo', 
+    last_name:'farias',
+    functions:'admin'
+    
+    },
+    {
+    email:'luisgrossol@hotmail.com',
+    first_name:'luis', 
+    last_name:'grossol',
+    functions:'admin'
         
+    },    
+    {
+    email:'algunocualquiera@gmail.com',
+    first_name:'pablito',
+    last_name:'marmol',
+        
+    },
+    {
+    email:'leojg@gmail.com',
+    first_name:'leopoldo',
+    last_name:'perez',
+    functions:'banned'    
     }
 ]
 
