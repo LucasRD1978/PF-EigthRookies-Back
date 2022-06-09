@@ -29,7 +29,7 @@ route.get("/userList", authorization, (req, res) => {
 
 route.post("/register", async (req, res) => {
     try{
-    let {email, first_name, last_name ,image, phone, postal_code, address, idRol } = req.body;
+    let {email, first_name, last_name ,image, phone, postal_code, address } = req.body;
     if(!email || !first_name){
         return res.json({msg:"The name and the email are required to create a new user"})
     }
@@ -45,13 +45,15 @@ route.post("/register", async (req, res) => {
     //console.log(user)
 
     if(!user) {
-        let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address, idRol
+        let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address
         })
-        const token = generatorToken(nameCreated, idRol);
-        res.json({token});
+        const token = generatorToken(nameCreated);
+        res.json({token, nameCreated});
     } else {
-        const token = generatorToken(user, idRol);
+    
+        const token = generatorToken(user);
         return res.status(201).json({token, user})
+        
     }
 
     //const salt = await bcrypt.genSalt(10);
@@ -71,11 +73,13 @@ route.post("/login", async (req, res) => {
     const {email, name} = req.body;
     const user = await User.findOne({where: {email: email}})
     //console.log(user);
+    
     if(!user) return res.status(401).send({msg:"Name or email is incorrect"})
+    console.log(user,'estoy')
+   
+        const token = generatorToken(user.id)
 
-    const token = generatorToken(user.id);
-
-    res.json({token})
+        res.json({token})
 })
 
 module.exports = route;

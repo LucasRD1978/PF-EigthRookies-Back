@@ -33,7 +33,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 const { Products, Category, User, ShoppingCar, Sales, Buy, PriceRange, Rol, PaymenthMethod,
-  CommercialInvoiceType, Cities, Province, Order } = sequelize.models;
+  CommercialInvoiceType, Cities, Province, Order, Review } = sequelize.models;
 
 Category.hasMany(Products);
 Products.belongsTo(Category);
@@ -72,8 +72,14 @@ Province.hasMany(Cities);
 Cities.belongsTo(Province);
 
 User.hasMany(Order);
-Products.hasMany(Order)
-Order.belongsTo(User)
+Products.hasMany(Order);
+Order.belongsTo(User);
+
+Products.hasMany(Review);
+Review.belongsTo(Products);
+
+User.hasMany(Review);
+Review.belongsTo(User);
 
 
 // Aca vendrian las relaciones
