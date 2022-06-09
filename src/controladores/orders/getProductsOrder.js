@@ -18,6 +18,7 @@ const getProductsOrder = async (status) => {
           attributes: ["name"],
         },
       ],
+      order:[["name","ASC"]]
     });
     if (inCartProducts.length > 0) {
       return inCartProducts;
