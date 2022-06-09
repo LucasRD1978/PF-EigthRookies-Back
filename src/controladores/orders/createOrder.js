@@ -6,7 +6,7 @@ const createOrder = async (status, amount, user, productId) => {
     try {
         //  const foundUser = await User.findOne({ where: {email: email}})
         const foundProduct = await Products.findOne({ where: {id: productId}})
-        if (foundProduct) {
+        if (foundProduct ) {
         const existingOrder = await Order.findOne({ 
             where: {status: status, productId: productId}
             })
