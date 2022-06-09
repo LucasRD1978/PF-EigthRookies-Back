@@ -50,8 +50,10 @@ route.post("/register", async (req, res) => {
         const token = generatorToken(nameCreated);
         res.json({token, nameCreated});
     } else {
+    
         const token = generatorToken(user);
         return res.status(201).json({token, user})
+        
     }
 
     //const salt = await bcrypt.genSalt(10);
@@ -71,11 +73,13 @@ route.post("/login", async (req, res) => {
     const {email, name} = req.body;
     const user = await User.findOne({where: {email: email}})
     //console.log(user);
+    
     if(!user) return res.status(401).send({msg:"Name or email is incorrect"})
+    console.log(user,'estoy')
+   
+        const token = generatorToken(user.id)
 
-    const token = generatorToken(user.id);
-
-    res.json({token})
+        res.json({token})
 })
 
 module.exports = route;
