@@ -8,7 +8,7 @@ const arrObj=[
     email:'leorodr4446@gmail.com',
     first_name:'leonardo', 
     last_name:'rodriguez',
-    functions:'admin'
+    functions:'banned'
 
     },
     {
@@ -19,7 +19,7 @@ const arrObj=[
     
     },
     {
-    email:'luisgrossol@hotmail.com',
+    email:'luisenriquegrosso@gmail.com',
     first_name:'luis', 
     last_name:'grossol',
     functions:'admin'
@@ -35,7 +35,7 @@ const arrObj=[
     email:'leojg@gmail.com',
     first_name:'leopoldo',
     last_name:'perez',
-    functions:'banned'    
+    functions:'admin'    
     }
 ]
 

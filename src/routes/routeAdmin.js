@@ -1,12 +1,10 @@
 const express = require('express');
-const { User, Rol, Cities, ShoppingCar } = require('../db.js');
-const axios = require('axios');
+const { User, ShoppingCar } = require('../db.js');
 const { Router } = require('express');
-const bcrypt = require('bcrypt');
 const generatorToken = require('../controladores/util/generateToken.js');
 const authorization = require('../controladores/middleware/authorization');
+const { redirect } = require('express/lib/response');
 
-//otros comments
 
 const route = express.Router();
 route.use(express.json());
@@ -44,6 +42,7 @@ route.post("/register", async (req, res) => {
             }
         });
 
+
         if (!user) {
             let nameCreated = await User.create({
                 email, first_name, last_name, image, phone, postal_code, address
@@ -52,8 +51,12 @@ route.post("/register", async (req, res) => {
             res.json({ token, nameCreated });
         } else {
 
-            const token = generatorToken(user);
-            return res.status(201).json({ token, user });
+            if (user.dataValues.functions === 'banned') {
+                return res.send('banned');
+            } else {
+                const token = generatorToken(user);
+                return res.status(201).json({ token, user });
+            }
 
         }
 
@@ -61,20 +64,6 @@ route.post("/register", async (req, res) => {
         console.log(error);
         res.status(400).send({ msg: "Error creating a user" });
     }
-});
-//-------------------------------------ROUTE LOGIN --------------------
-
-route.post("/login", async (req, res) => {
-    const { email, name } = req.body;
-    const user = await User.findOne({ where: { email: email } });
-    //console.log(user);
-
-    if (!user) return res.status(401).send({ msg: "Name or email is incorrect" });
-    console.log(user, 'estoy');
-
-    const token = generatorToken(user.id);
-
-    res.json({ token });
 });
 
 module.exports = route;
