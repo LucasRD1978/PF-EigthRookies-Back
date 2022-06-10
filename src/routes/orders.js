@@ -10,9 +10,11 @@ const postAllOrders = require('../controladores/orders/postAllOrders.js');
 const route = Router();
 
 route.post("", async(req, res) => {
-    const {status, amount , user, productId} = req.body;
+    const {status, amount , email, productId} = req.body;
     try {
-        const created = await createOrder(status, amount, user, productId)
+
+        const created = await createOrder(status, amount, email, productId)
+
     if (typeof created !== 'boolean') {
       return res.send(created);
     } else if (created) {
@@ -42,10 +44,13 @@ route.put('', async function (req, res) {
   }
 });
 
-route.get('', async (req, res) => {
+route.get('/', async (req, res) =>{
+    
+  const { status, user } = req.query;
+  
   try {
-    const { status } = req.query;
-    const cart = await getProductsOrder(status);
+
+    const cart = await getProductsOrder(status, user);
     if (cart) {
       return res.send(cart);
     }
@@ -70,21 +75,21 @@ route.delete('/:id', async function (req, res) {
   }
 });
 
-route.post('/postAllOrders', async function (req, res) {
-  try {
-    const { orderIds } = req.body;
-    // const user = req.user.user;
-    console.log("soy req.body", req.body);
-    const created = await postAllOrders({ orderIds });
-    if (typeof created !== 'boolean') {
-      console.log("created", created);
-      return res.send(created);
-    } else if (created) {
-      return res.send({ msg: 'all order created' });
-    }
-    return res.send({ error: "couldn't create all order" });
-  } catch (err) {
-    console.log(err);
+  route.post('/postAllOrders', async function (req, res) {
+    try {
+      const { orderIds } = req.body;
+      // const user = req.user.user;
+      const created = await postAllOrders({ orderIds });
+      if (typeof created !== 'boolean') {
+        console.log("created", created)
+        return res.send(created);
+      } else if (created) {
+        return res.send({ msg: 'all order created' });
+      }
+      return res.send({ error: "couldn't create all order" });
+     } catch (err) {
+      console.log(err);
+
   }
 });
 

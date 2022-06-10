@@ -1,12 +1,13 @@
 const {Order, User, Products} = require('../../db.js');
 const Sequelize = require('sequelize')
 
-const createOrder = async (status, amount, user, productId) => {
+const createOrder = async (status, amount, emailID, productId) => {
     const orderAmount = amount || 1 ;
     try {
-        // const foundUser = await User.findOne({ where: {id: user.id}})
+         const foundUser = await User.findByPk(emailID)
+
         const foundProduct = await Products.findOne({ where: {id: productId}})
-        if (foundProduct) {
+        if (foundProduct && foundUser) {
         const existingOrder = await Order.findOne({ 
             where: {status: status, productId: productId}
             })
@@ -15,7 +16,7 @@ const createOrder = async (status, amount, user, productId) => {
                 status: status,
                 amount: orderAmount
             })
-        // await foundUser.addOrder(newOrder);
+        await foundUser.addOrder(newOrder);
         await foundProduct.addOrder(newOrder);
         } else {
         existingOrder.amount = existingOrder.amount + Number(orderAmount);

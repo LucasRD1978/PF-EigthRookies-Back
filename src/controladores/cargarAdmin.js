@@ -19,7 +19,7 @@ const arrObj=[
     
     },
     {
-    email:'luisgrossol@hotmail.com',
+    email:'luisenriquegrosso@gmail.com',
     first_name:'luis', 
     last_name:'grossol',
     functions:'admin'
