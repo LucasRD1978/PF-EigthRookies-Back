@@ -4,7 +4,8 @@ const axios = require('axios');
 const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const generatorToken = require('../controladores/util/generateToken.js')
-const authorization = require('../controladores/middleware/authorization')
+const authorization = require('../controladores/middleware/authorization');
+const { redirect } = require('express/lib/response');
 
 //otros comments
 
@@ -42,17 +43,20 @@ route.post("/register", async (req, res) => {
          include:{
              model: ShoppingCar
          }})
-    //console.log(user)
-
+    //console.log(user.dataValues.functions)
+   
+   
     if(!user) {
         let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address
         })
         const token = generatorToken(nameCreated);
         res.json({token, nameCreated});
     } else {
-    
+        
+        if(user.dataValues.functions==='banned'){return res.send('banned')}
+        else{
         const token = generatorToken(user);
-        return res.status(201).json({token, user})
+        return res.status(201).json({token, user})}
         
     }
 
@@ -72,10 +76,10 @@ route.post("/register", async (req, res) => {
 route.post("/login", async (req, res) => {
     const {email, name} = req.body;
     const user = await User.findOne({where: {email: email}})
-    //console.log(user);
-    
+   // console.log(user);
+    if(user.functions==='banned'){return res.status(404).end()}
     if(!user) return res.status(401).send({msg:"Name or email is incorrect"})
-    console.log(user,'estoy')
+   
    
         const token = generatorToken(user.id)
 
