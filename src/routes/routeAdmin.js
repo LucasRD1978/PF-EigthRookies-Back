@@ -5,6 +5,7 @@ const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const generatorToken = require('../controladores/util/generateToken.js')
 const authorization = require('../controladores/middleware/authorization')
+const sendEmail = require('../controladores/util/sendEmail')
 
 //otros comments
 
@@ -48,6 +49,7 @@ route.post("/register", async (req, res) => {
         let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address
         })
         const token = generatorToken(nameCreated);
+        sendEmail(email)
         res.json({token, nameCreated});
     } else {
     
