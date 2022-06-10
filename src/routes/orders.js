@@ -9,7 +9,7 @@ const postAllOrders = require('../controladores/orders/postAllOrders.js');
 
 const route = Router();
 
-route.post('/', async (req, res) => {
+route.post("", async (req, res) => {
   const { status, amount, email, productId } = req.body;
   try {
 
@@ -79,7 +79,6 @@ route.post('/postAllOrders', async function (req, res) {
   try {
     const { orderIds } = req.body;
     // const user = req.user.user;
-    console.log("soy req.body", req.body);
     const created = await postAllOrders({ orderIds });
     if (typeof created !== 'boolean') {
       console.log("created", created);
@@ -90,24 +89,7 @@ route.post('/postAllOrders', async function (req, res) {
     return res.send({ error: "couldn't create all order" });
   } catch (err) {
     console.log(err);
-  }
-});
 
-route.post('/postAllOrders', async function (req, res) {
-
-  try {
-    const { orderIds } = req.body;
-    // const user = req.user.user;
-    const created = await postAllOrders({ orderIds, user });
-    if (typeof created !== 'boolean') {
-      console.log("created", created);
-      return res.send(created);
-    } else if (created) {
-      return res.send({ msg: 'all order created' });
-    }
-    return res.send({ error: "couldn't create all order" });
-  } catch (err) {
-    console.log(err);
   }
 });
 

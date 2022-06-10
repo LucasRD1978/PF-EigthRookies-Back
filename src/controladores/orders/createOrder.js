@@ -5,7 +5,7 @@ const createOrder = async (status, amount, emailID, productId) => {
     const orderAmount = amount || 1 ;
     try {
          const foundUser = await User.findByPk(emailID)
-         console.log(foundUser);
+
         const foundProduct = await Products.findOne({ where: {id: productId}})
         if (foundProduct && foundUser) {
         const existingOrder = await Order.findOne({ 

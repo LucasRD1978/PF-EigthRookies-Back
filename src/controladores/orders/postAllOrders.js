@@ -9,7 +9,6 @@ const postAllOrders = async (data) => {
       for (const order of orderIds) {
         const foundOrder = await Order.findByPk(order);
         foundOrder.status = "pending";
-        console.log("soy foundOrder.dataValues.productId", foundOrder.dataValues.productId)
         await foundOrder.save();
         const foundProduct = await Products.findOne({where: {id: foundOrder.dataValues.productId}});
         fullPrice = fullPrice + foundOrder.dataValues.amount * foundProduct.dataValues.price;
