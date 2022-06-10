@@ -8,7 +8,7 @@ const route = Router()
 route.post("", async(req, res) => {
     const {status, amount , user, productId} = req.body;
     try {
-        const created = await createOrde(status, amount, user, productId)
+        const created = await createOrder(status, amount, user, productId)
     if (typeof created !== 'boolean') {
       return res.send(created);
         } else if (created) {
