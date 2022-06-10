@@ -22,7 +22,7 @@ route.get(
       const { query } = req;
       const pageSize = query.pageSize || 8;
       const page = query.page || 1;
-      const category = query.category || '';
+      const category = query.category*1 || '';
       const price = query.price || '';
       // const rating = query.rating || '';
       const order = query.order || '';
