@@ -4,14 +4,17 @@ module.exports = (sequelize) => {
 
     sequelize.define('shoppingCar', {
 
-        payment_id: {
-            type: DataTypes.INTEGER
-        },
         status: {
             type: DataTypes.STRING
         },
+        payment_id: {
+            type: DataTypes.INTEGER
+        },
         payment_type: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+        },
+        merchant_order_id: {
+            type: DataTypes.STRING,
         }
     })
 }

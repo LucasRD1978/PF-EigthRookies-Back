@@ -51,9 +51,10 @@ const handleStatus = async (req, res, next) => {
             status: status.status,
             payment_id: status.payment_id,
             payment_type: status.payment_type,
+            merchant_order_id: status.merchant_order_id
 
         });
-        res.redirect('http://localhost:3000/login');
+        res.redirect('http://localhost:3000');
 
     } catch (error) {
         console.error(error);
