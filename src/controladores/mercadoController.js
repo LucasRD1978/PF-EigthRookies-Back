@@ -7,7 +7,7 @@ const { json } = require('body-parser');
 
 const createOrder = async (req, res, next) => {
 
-    const {carrito} = req.body
+    const { carrito } = req.body;
 
     mercadopago.configure({
         access_token: ACCESS_TOKEN
@@ -33,17 +33,17 @@ const createOrder = async (req, res, next) => {
         .then((data) => {
             res.status(200).send({ url: data.response.init_point }); //url de mercado pago
         })
-       .catch((e) => {
-           res.status(400).json(e);
-           next()
-       });
+        .catch((e) => {
+            res.status(400).json(e);
+            next();
+        });
 };
 
 
 const handleStatus = async (req, res, next) => {
 
     const status = req.query;
-    console.log(status)
+    console.log(status);
 
     try {
 
@@ -61,21 +61,5 @@ const handleStatus = async (req, res, next) => {
         next();
     }
 };
-
-/* 
-{
-  collection_id: '1260707851',
-  collection_status: 'approved',
-  payment_id: '1260707851',
-  status: 'approved',
-  external_reference: 'null',
-  payment_type: 'credit_card',
-  merchant_order_id: '4958746671',
-  preference_id: '1139977918-fb38a428-3ae3-42da-bebe-dabdbccb23a5',
-  site_id: 'MLA',
-  processing_mode: 'aggregator',
-  merchant_account_id: 'null'
-}
-*/
 
 module.exports = { createOrder, handleStatus };
