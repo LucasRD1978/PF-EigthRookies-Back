@@ -5,8 +5,7 @@ module.exports = (sequelize) => {
     sequelize.define('shoppingCar', {
 
         payment_id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true
+            type: DataTypes.INTEGER
         },
         status: {
             type: DataTypes.STRING

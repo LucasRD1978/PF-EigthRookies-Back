@@ -39,21 +39,21 @@ const createOrder = async (req, res, next) => {
        });
 };
 
+
 const handleStatus = async (req, res, next) => {
+
     const status = req.query;
+    console.log(status)
 
     try {
 
-        res.status(200).json(status)
-        /* const cart = json(status);
+        await ShoppingCar.create({
+            status: status.status,
+            payment_id: status.payment_id,
+            payment_type: status.payment_type,
 
-const cartPay = await ShoppingCar.create({
-    status: cart.status,
-    payment_id: cart.payment_id,
-    payment_type: cart.payment_type
-});
-
-res.redirect('http://localhost:3000/login'); */
+        });
+        res.redirect('http://localhost:3000/login');
 
     } catch (error) {
         console.error(error);
@@ -61,5 +61,20 @@ res.redirect('http://localhost:3000/login'); */
     }
 };
 
+/* 
+{
+  collection_id: '1260707851',
+  collection_status: 'approved',
+  payment_id: '1260707851',
+  status: 'approved',
+  external_reference: 'null',
+  payment_type: 'credit_card',
+  merchant_order_id: '4958746671',
+  preference_id: '1139977918-fb38a428-3ae3-42da-bebe-dabdbccb23a5',
+  site_id: 'MLA',
+  processing_mode: 'aggregator',
+  merchant_account_id: 'null'
+}
+*/
 
 module.exports = { createOrder, handleStatus };
