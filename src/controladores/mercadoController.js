@@ -7,7 +7,7 @@ const { json } = require('body-parser');
 
 const createOrder = async (req, res, next) => {
 
-    const {carrito} = req.body
+    const { carrito } = req.body;
 
     mercadopago.configure({
         access_token: ACCESS_TOKEN
@@ -24,8 +24,8 @@ const createOrder = async (req, res, next) => {
         auto_return: 'approved',
         back_urls: {
             failure: 'http://localhost:3001/mercadopay/status',
-            pending: 'http://localhost:3000/products/carrito',
-            success: 'http://localhost:3000/'
+            pending: 'http://localhost:3001/mercadopay/status',
+            success: 'http://localhost:3001/mercadopay/status'
         }
     };
 
@@ -33,31 +33,33 @@ const createOrder = async (req, res, next) => {
         .then((data) => {
             res.status(200).send({ url: data.response.init_point }); //url de mercado pago
         })
-       .catch((e) => {
-           res.status(400).json(e);
-           next()
-       });
+        .catch((e) => {
+            res.status(400).json(e);
+            next();
+        });
 };
 
+
 const handleStatus = async (req, res, next) => {
+
     const status = req.query;
+    console.log(status);
 
     try {
 
-        res.status(200).json(status)
-        /* const cart = json(status);
-const cartPay = await ShoppingCar.create({
-    status: cart.status,
-    payment_id: cart.payment_id,
-    payment_type: cart.payment_type
-});
-res.redirect('http://localhost:3000/login'); */
+        await ShoppingCar.create({
+            status: status.status,
+            payment_id: status.payment_id,
+            payment_type: status.payment_type,
+            merchant_order_id: status.merchant_order_id
+
+        });
+        res.redirect('http://localhost:3000');
 
     } catch (error) {
         console.error(error);
         next();
     }
 };
-
 
 module.exports = { createOrder, handleStatus };

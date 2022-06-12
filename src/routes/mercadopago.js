@@ -6,6 +6,6 @@ const { createOrder, handleStatus } = require('../controladores/mercadoControlle
 const router = Router();
 
 router.post("/", createOrder);
-router.get('/status', handleStatus)
+router.get('/status', handleStatus);
 
 module.exports = router;
