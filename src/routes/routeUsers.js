@@ -26,5 +26,21 @@ route.post('/',(req,res,next)=>{
     .catch(()=>next())
 })
 
+route.get('/:user', async (req, res) => {
+    try {
+        const { user } = req.params;
+        console.log(user)
+        const foundUser = await User.findByPk(user);
+        if(foundUser){
+        return res.send(foundUser)
+        }
+        return res.send({msg: "could not find user"})
+    } catch (err) {
+      console.log("Error",err);
+      return false;
+    }
+  })
+  
+
 
 module.exports=route
