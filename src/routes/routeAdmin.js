@@ -35,7 +35,7 @@ route.post("/register", async (req, res) => {
         return res.json({msg:"The name and the email are required to create a new user"})
     }
 
-    const user = await User.findOne({
+    let user = await User.findOne({
     
         where: {
             email: email
@@ -47,10 +47,10 @@ route.post("/register", async (req, res) => {
    
    
     if(!user) {
-        let nameCreated = await User.create({email, first_name, last_name ,image, phone, postal_code, address
+        user = await User.create({email, first_name, last_name ,image, phone, postal_code, address
         })
-        const token = generatorToken(nameCreated);
-        res.json({token, nameCreated});
+        const token = generatorToken(user);
+        res.json({token, user});
     } else {
         
         if(user.dataValues.functions==='banned'){return res.send('banned')}

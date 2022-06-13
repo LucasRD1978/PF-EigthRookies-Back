@@ -16,6 +16,8 @@ const routeCrearCategory=require('./routeCrearCategory')
 const routeUpDateSatock=require('./routeUpDateStock')
 const routeUsers=require('./routeUsers')
 const routeReview = require('./routeReview');
+const routeUpDateProfileUser=require('./routeUpDateProfileUser')
+const routeUpDateFunction=require('./routeUpdateFunction')
 const router = Router();
 
 // Configurar los routers
@@ -34,5 +36,6 @@ router.use('/crearcategory',routeCrearCategory)
 router.use('/stock',routeUpDateSatock)
 router.use('/users',routeUsers)
 router.use('/routeReview', routeReview)
-
+router.use('/update/profileuser',routeUpDateProfileUser)
+router.use('/updatefunction',routeUpDateFunction)
 module.exports = router;
