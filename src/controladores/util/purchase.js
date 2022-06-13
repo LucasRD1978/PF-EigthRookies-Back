@@ -1,5 +1,4 @@
-function generatePurchase(payment_id) {
-    const purchase = `<html>
+const purchase = `<html>
 
 <head>
     <style type="text/css">
@@ -621,6 +620,6 @@ function generatePurchase(payment_id) {
     <!--[if IE]></div><![endif]-->
 </body>
 
-</html>`;
-    return purchase;
-}
+</html>`
+
+module.exports = purchase;
