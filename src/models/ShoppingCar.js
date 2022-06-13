@@ -4,9 +4,21 @@ module.exports = (sequelize) => {
 
     sequelize.define('shoppingCar', {
 
-        amount: {
-            type: DataTypes.INTEGER,
-            defaultValue: 1
+        status: {
+            type: DataTypes.STRING
+        },
+        payment_id: {
+            type: DataTypes.INTEGER
+        },
+        payment_type: {
+            type: DataTypes.STRING,
+        },
+        merchant_order_id: {
+            type: DataTypes.STRING,
+        },
+        fullPrice: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
         },
     })
 }

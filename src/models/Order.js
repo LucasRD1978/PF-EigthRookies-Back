@@ -45,9 +45,5 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    fullPrice: {
-      type: DataTypes.FLOAT,
-      allowNull: true,
-    },
   });
 };

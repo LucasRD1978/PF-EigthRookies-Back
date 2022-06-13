@@ -3,9 +3,9 @@ const Sequelize = require('sequelize')
 const {Op} = Sequelize.Op
 
 
-const getProductsOrder = async (status) => {
+const getProductsOrder = async (status, user) => {
   try {
-    let whereStatement = { where: { status: status}}
+    let whereStatement = { where: { status: status, userEmail: user}}
     const inCartProducts = await Products.findAll({
       attributes: ['name', 'id', "price", 'description', "image"],
       include: [
