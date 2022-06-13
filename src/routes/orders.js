@@ -75,37 +75,19 @@ route.delete('/:id', async function (req, res) {
   }
 });
 
-<<<<<<< HEAD
-  route.post('/postAllOrders', async function (req, res) {
-    try {
-      const { orderIds, user } = req.body;
-      // const user = req.user.user;
-      const created = await postAllOrders({ orderIds, user });
-      if (typeof created !== 'boolean') {
-        console.log("created", created)
-        return res.send(created);
-      } else if (created) {
-        return res.send({ msg: 'all order created' });
-      }
-      return res.send({ error: "couldn't create all order" });
-     } catch (err) {
-      console.log(err);
-=======
 route.post('/postAllOrders', async function (req, res) {
   try {
-    const { orderIds } = req.body;
+    const { user, address } = req.body;
     // const user = req.user.user;
-    const created = await postAllOrders({ orderIds });
+    const created = await postAllOrders({ user, address });
     if (typeof created !== 'boolean') {
-      console.log("created", created);
       return res.send(created);
     } else if (created) {
-      return res.send({ msg: 'all order created' });
+      return res.send(created);
     }
     return res.send({ error: "couldn't create all order" });
   } catch (err) {
     console.log(err);
->>>>>>> 4f4528846a2bd448181d0c2f4959bb4cc816695a
 
   }
 });

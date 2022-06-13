@@ -23,9 +23,9 @@ const createOrder = async (req, res, next) => {
         items: allProducts,
         auto_return: 'approved',
         back_urls: {
-            failure: 'http://localhost:3001/mercadopay/status',
+            failure: `http://localhost:3000/products/carrito`,
             pending: 'http://localhost:3001/mercadopay/status',
-            success: 'http://localhost:3001/mercadopay/status'
+            success: `http://localhost:3001/mercadopay/status`
         }
     };
 
@@ -43,18 +43,18 @@ const createOrder = async (req, res, next) => {
 const handleStatus = async (req, res, next) => {
 
     const status = req.query;
-    console.log(status);
 
     try {
 
-        await ShoppingCar.create({
+    const newShoppingCar = await ShoppingCar.create({
             status: status.status,
             payment_id: status.payment_id,
             payment_type: status.payment_type,
             merchant_order_id: status.merchant_order_id
-
         });
-        res.redirect('http://localhost:3000');
+
+    
+    res.redirect(`http://localhost:3000/purchase/${newShoppingCar.payment_id}`);
 
     } catch (error) {
         console.error(error);
