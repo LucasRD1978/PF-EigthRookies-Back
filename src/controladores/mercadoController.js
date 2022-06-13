@@ -55,7 +55,7 @@ const handleStatus = async (req, res, next) => {
             payment_type: status.payment_type
         });
 
-        sendEmailPurchase(emailSend, newShoppingCar.payment_id);
+        //sendEmailPurchase(emailSend, newShoppingCar.payment_id);
 
         res.redirect(`http://localhost:3000/purchase/${newShoppingCar.payment_id}`);
 

@@ -44,7 +44,7 @@ route.post("/register", async (req, res) => {
                 email, first_name, last_name, image, phone, postal_code, address
             });
 
-            sendEmailWelcome(email)
+            //sendEmailWelcome(email)
 
             const token = generatorToken(user);
             res.json({ token, user });
