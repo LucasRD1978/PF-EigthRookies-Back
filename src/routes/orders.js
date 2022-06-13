@@ -9,11 +9,11 @@ const postAllOrders = require('../controladores/orders/postAllOrders.js');
 
 const route = Router();
 
-route.post("", async(req, res) => {
-    const {status, amount , email, productId} = req.body;
-    try {
+route.post("", async (req, res) => {
+  const { status, amount, email, productId } = req.body;
+  try {
 
-        const created = await createOrder(status, amount, email, productId)
+    const created = await createOrder(status, amount, email, productId);
 
     if (typeof created !== 'boolean') {
       return res.send(created);
@@ -26,7 +26,7 @@ route.post("", async(req, res) => {
   }
 });
 
-route.put('', async function (req, res) {
+route.put('/', async function (req, res) {
   try {
     const { status, amount, productId } = req.body;
     if (amount) { //si cambia el amount
@@ -44,10 +44,10 @@ route.put('', async function (req, res) {
   }
 });
 
-route.get('/', async (req, res) =>{
-    
+route.get('/', async (req, res) => {
+
   const { status, user } = req.query;
-  
+
   try {
 
     const cart = await getProductsOrder(status, user);
@@ -75,20 +75,20 @@ route.delete('/:id', async function (req, res) {
   }
 });
 
-  route.post('/postAllOrders', async function (req, res) {
-    try {
-      const { orderIds } = req.body;
-      // const user = req.user.user;
-      const created = await postAllOrders({ orderIds });
-      if (typeof created !== 'boolean') {
-        console.log("created", created)
-        return res.send(created);
-      } else if (created) {
-        return res.send({ msg: 'all order created' });
-      }
-      return res.send({ error: "couldn't create all order" });
-     } catch (err) {
-      console.log(err);
+route.post('/postAllOrders', async function (req, res) {
+  try {
+    const { orderIds } = req.body;
+    // const user = req.user.user;
+    const created = await postAllOrders({ orderIds });
+    if (typeof created !== 'boolean') {
+      console.log("created", created);
+      return res.send(created);
+    } else if (created) {
+      return res.send({ msg: 'all order created' });
+    }
+    return res.send({ error: "couldn't create all order" });
+  } catch (err) {
+    console.log(err);
 
   }
 });
