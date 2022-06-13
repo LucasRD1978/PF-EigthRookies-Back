@@ -13,6 +13,7 @@ const changeOrderStatus = async (data) => {
             const foundProduct = await Products.findOne({where: {id: foundOrder.productId}});
             fullPrice = fullPrice + foundOrder.amount * foundProduct.price;
             foundOrder.status = "finished";
+            foundOrder.purchaseId = purchaseId
             foundOrder.save();
             newShoppingCar.addOrder(foundOrder);
             }
