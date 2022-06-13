@@ -5,12 +5,12 @@ const { redirect } = require('express/lib/response');
 const { User, ShoppingCar } = require('../db');
 const { sendEmailPurchase } = require('../controladores/util/sendEmail');
 
-let emailUser = null
+let emailSend = null;
 
 const createOrder = async (req, res, next) => {
 
-    const { carrito, email } = req.body;
-    let emailUser = email
+    const { carrito, userEmail } = req.body;
+    emailSend = userEmail;
 
     mercadopago.configure({
         access_token: ACCESS_TOKEN
@@ -26,7 +26,7 @@ const createOrder = async (req, res, next) => {
         items: allProducts,
         auto_return: 'approved',
         back_urls: {
-            failure: 'http://localhost:3001/mercadopay/status',
+            failure: 'http://localhost:3000/products/carrito',
             pending: 'http://localhost:3001/mercadopay/status',
             success: 'http://localhost:3001/mercadopay/status'
         }
@@ -49,15 +49,15 @@ const handleStatus = async (req, res, next) => {
 
     try {
 
-        await ShoppingCar.create({
+        const newShoppingCar = await ShoppingCar.create({
             status: status.status,
             payment_id: status.payment_id,
             payment_type: status.payment_type
         });
 
-        sendEmailPurchase(req, res, emailUser, status.payment_id)
+        sendEmailPurchase(emailSend, newShoppingCar.payment_id);
 
-        res.redirect('http://localhost:3000');
+        res.redirect(`http://localhost:3000/purchase/${newShoppingCar.payment_id}`);
 
     } catch (error) {
         console.error(error);

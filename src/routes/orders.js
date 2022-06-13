@@ -77,14 +77,13 @@ route.delete('/:id', async function (req, res) {
 
 route.post('/postAllOrders', async function (req, res) {
   try {
-    const { orderIds } = req.body;
+    const { user, address } = req.body;
     // const user = req.user.user;
-    const created = await postAllOrders({ orderIds });
+    const created = await postAllOrders({ user, address });
     if (typeof created !== 'boolean') {
-      console.log("created", created);
       return res.send(created);
     } else if (created) {
-      return res.send({ msg: 'all order created' });
+      return res.send(created);
     }
     return res.send({ error: "couldn't create all order" });
   } catch (err) {
