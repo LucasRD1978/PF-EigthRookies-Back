@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-function sendEmail(email) {
+function sendEmailWelcome(email) {
 
     const htmlWelcome = require('./welcome')
 
@@ -23,13 +23,29 @@ function sendEmail(email) {
         html: htmlWelcome
     };
 
-    transporter.sendMail(mailOptions, (error, sucess) => {
+    transporter.sendMail(mailOptions, (error) => {
         if (error) {
-            res.status(500).send(error.message);
-        } else {
-            res.status(200);
+            console.log(error.message);
         }
     });
 }
 
-module.exports = sendEmail;
+function sendEmailPurchase(email, payment_id) {
+
+    const htmlPurchase = require('./purchase');
+
+    const mailOptions = {
+        from: '"The Rookies Web Site" <leme.30589@gmail.com>',
+        to: email,
+        subject: `Your purchase number is ${payment_id}`,
+        html: htmlPurchase
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+        if (error) {
+            console.log(error.message);
+        }
+    });
+}
+
+module.exports = { sendEmailWelcome, sendEmailPurchase };
