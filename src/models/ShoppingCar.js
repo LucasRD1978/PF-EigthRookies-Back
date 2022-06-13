@@ -15,8 +15,10 @@ module.exports = (sequelize) => {
         },
         merchant_order_id: {
             type: DataTypes.STRING,
-        }
+        },
+        fullPrice: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+        },
     })
 }
-
-    
