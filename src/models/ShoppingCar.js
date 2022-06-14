@@ -13,12 +13,11 @@ module.exports = (sequelize) => {
         payment_type: {
             type: DataTypes.STRING,
         },
-        merchant_order_id: {
-            type: DataTypes.STRING,
-        },
         fullPrice: {
             type: DataTypes.FLOAT,
-            allowNull: true,
         },
+        products: {
+            type: DataTypes.ARRAY(DataTypes.STRING)
+        }
     })
 }

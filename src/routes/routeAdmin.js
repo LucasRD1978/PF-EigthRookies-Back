@@ -40,15 +40,18 @@ route.post("/register", async (req, res) => {
         },
          include:{
              model: ShoppingCar
-         }})
-    //console.log(user.dataValues.functions)
+        }
+    })
    
    
     if(!user) {
         user = await User.create({email, first_name, last_name ,image, phone, postal_code, address
         })
+
+        //sendEmailWelcome(email)
         const token = generatorToken(user);
-        res.json({token, user});
+        res.json({ token, user });
+
     } else {
         
         if(user.dataValues.functions==='banned'){return res.send('banned')}

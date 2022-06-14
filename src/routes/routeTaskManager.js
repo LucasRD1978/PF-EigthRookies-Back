@@ -6,14 +6,16 @@ const route = Router()
 route.get('/',(req,res,next)=>{
     const{user}=req.query
     Order.findAll({
+        where:{status:'inCart'},
          include:[{
-                
+            
              model:User,
-             }]}
+            }]
+        })
             
 
         // }]
-    )
+    
     .then((r)=>res.send(r))
     .catch(()=>next())
 })
