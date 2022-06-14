@@ -19,6 +19,7 @@ const mercadoPago = require('./mercadopago');
 const routeReview = require('./routeReview');
 const routeUpDateProfileUser=require('./routeUpDateProfileUser')
 const routeUpDateFunction=require('./routeUpdateFunction')
+const routeTaskManager=require('./routeTaskManager');
 const router = Router();
 
 // Configurar los routers
@@ -47,6 +48,7 @@ router.use('/updatefunction',routeUpDateFunction)
 
 router.use("/mercadopay", mercadoPago);
 router.use('/routeReview', routeReview);
+router.use('/taskmanager',routeTaskManager)
 
 
 module.exports = router;
