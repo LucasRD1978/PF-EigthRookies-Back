@@ -19,6 +19,7 @@ const mercadoPago = require('./mercadopago');
 const routeReview = require('./routeReview');
 const routeUpDateProfileUser=require('./routeUpDateProfileUser')
 const routeUpDateFunction=require('./routeUpdateFunction')
+const routeTaskManager=require('./routeTaskManager');
 const getHistoryPurchase = require('./getHistoryPurchase')
 
 const router = Router();
@@ -45,6 +46,7 @@ router.use('/updatefunction',routeUpDateFunction)
 
 router.use("/mercadopay", mercadoPago);
 router.use('/routeReview', routeReview);
+router.use('/taskmanager',routeTaskManager)
 router.use('/purchases', getHistoryPurchase);
 
 
