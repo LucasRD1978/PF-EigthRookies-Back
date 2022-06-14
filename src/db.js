@@ -45,6 +45,7 @@ Products.hasMany(ShoppingCar);
 ShoppingCar.belongsTo(Products);
 
 ShoppingCar.hasMany(Sales);
+ShoppingCar.hasMany(Order);
 Sales.belongsTo(ShoppingCar);
 
 Products.hasMany(Buy);
