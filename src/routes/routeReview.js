@@ -55,12 +55,12 @@ route.get('/:productId/review/user/:userEmail', (req, res) =>{
 });
 
 //Ruta para crear una review
-route.post('/:productId/review', (req, res) => {
+route.post('/:productId', (req, res) => {
     
     const {productId} = req.params;
-    const {title, rate, content, userEmail} = req.body;
+    const { title, rate, content, userEmail} = req.body;
 
-    return Review.create({productId, title, content, rate, userEmail})
+    return Review.create({ productId, title, content, rate, userEmail})
     .then(() => {
         return Products.findAll({
             include: [{model: Category}, {model: Review}]
