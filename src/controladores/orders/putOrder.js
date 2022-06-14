@@ -1,8 +1,8 @@
 const { Order } = require('../../db.js');
 
-const putOrder = async (productId, amount, status) => {
+const putOrder = async (productId, amount, status, user) => {
     try {
-      const order = await Order.findOne({ where: { productId , status} });
+      const order = await Order.findOne({ where: { productId , status, userEmail: user} });
       if (order) {
         if (Number(order.amount) + Number(amount) < 1) {
           await Order.destroy({ where: { productId , status} });
