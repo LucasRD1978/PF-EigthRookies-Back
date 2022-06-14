@@ -46,11 +46,10 @@ route.put('/', async function (req, res) {
 
 route.get('/', async (req, res) => {
 
-  const { status, user } = req.query;
-
+  const { status, user, purchaseId } = req.query;
   try {
 
-    const cart = await getProductsOrder(status, user);
+    const cart = await getProductsOrder(status, user, purchaseId);
     if (cart) {
       return res.send(cart);
     }

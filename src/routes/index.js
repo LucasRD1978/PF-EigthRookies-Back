@@ -17,6 +17,10 @@ const routeUpDateSatock = require('./routeUpDateStock');
 const routeUsers = require('./routeUsers');
 const mercadoPago = require('./mercadopago');
 const routeReview = require('./routeReview');
+const routeUpDateProfileUser=require('./routeUpDateProfileUser')
+const routeUpDateFunction=require('./routeUpdateFunction')
+const getHistoryPurchase = require('./getHistoryPurchase')
+
 const router = Router();
 
 // Configurar los routers
@@ -30,11 +34,18 @@ router.use('/category', routeCategory);
 router.use('/paginado', paginado);
 router.use('/nuevaruta', nuevaRuta);
 router.use('/order', orders);
-router.use('/updateproduct', routeUpdateProduct);
-router.use('/crearcategory', routeCrearCategory);
-router.use('/stock', routeUpDateSatock);
-router.use('/users', routeUsers);
+
+router.use('/updateproduct',routeUpdateProduct)
+router.use('/crearcategory',routeCrearCategory)
+router.use('/stock',routeUpDateSatock)
+router.use('/users',routeUsers)
+
+router.use('/update/profileuser',routeUpDateProfileUser)
+router.use('/updatefunction',routeUpDateFunction)
+
 router.use("/mercadopay", mercadoPago);
 router.use('/routeReview', routeReview);
+router.use('/purchases', getHistoryPurchase);
+
 
 module.exports = router;
