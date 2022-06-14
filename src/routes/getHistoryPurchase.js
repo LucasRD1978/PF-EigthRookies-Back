@@ -7,12 +7,12 @@ const route = Router();
 route.use(express.json());
 
 
-route.get("/", (req, res) => {
-    const { payment_id } = req.query;
+route.get('/:payments_id', (req, res) => {
+    const { payments_id } = req.params;
 
     axios({
         method: 'get',
-        url: `https://api.mercadopago.com/v1/payments/${payment_id}`,
+        url: `https://api.mercadopago.com/v1/payments/${payments_id}`,
         headers: { Authorization: 'Bearer ' + ACCESS_TOKEN }
     }).then((r) => {
         const formatInfo = {
