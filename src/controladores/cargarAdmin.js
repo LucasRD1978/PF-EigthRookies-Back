@@ -8,7 +8,7 @@ const arrObj=[
     email:'leorodr4446@gmail.com',
     first_name:'leonardo', 
     last_name:'rodriguez',
-    functions:'banned'
+    functions:'admin'
 
     },
     {

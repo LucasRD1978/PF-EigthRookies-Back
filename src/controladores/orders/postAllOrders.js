@@ -1,4 +1,4 @@
-const { Order, Products, User } = require('../../db.js');
+const { User } = require('../../db.js');
 
 const postAllOrders = async (data) => {
   try {
@@ -8,7 +8,7 @@ const postAllOrders = async (data) => {
         if(foundUser){
         foundUser.address = address
         foundUser.save()
-      }
+        }
     return foundUser;
     }
   } catch (err) {
