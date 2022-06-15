@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const {Products, Review, User, Category} = require('../db');
+const {Products, Review, User, Category, Order} = require('../db');
 const {Op} = require('sequelize');
 
 const route = Router();
@@ -55,12 +55,12 @@ route.get('/:productId/review/user/:userEmail', (req, res) =>{
 });
 
 //Ruta para crear una review
-route.post('/:productId/review', (req, res) => {
+route.post('/:productId', (req, res) => {
     
     const {productId} = req.params;
-    const {title, rate, content, userEmail} = req.body;
+    const { title, rate, content, userEmail} = req.body;
 
-    return Review.create({productId, title, content, rate, userEmail})
+    return Review.create({ productId, title, content, rate, userEmail})
     .then(() => {
         return Products.findAll({
             include: [{model: Category}, {model: Review}]
@@ -130,6 +130,24 @@ route.delete('/:productId/review/:id', (req, res) => {
             data: err
         })
     })
+})
+
+route.get('/pagado', async (req,res,next)=>{
+    const { userEmail, productId} = req.query;
+    try{
+    const result = await Order.findAll({
+        where:{status:'finished',userEmail:userEmail, productId: productId}
+        })
+
+        if(result.length){
+            res.status(200).send(true)
+        } else res.status(400).send(false)
+    } catch(error){
+        console.log(error,"Error en el proceso de consulta")
+        next();
+    }
+
+    
 })
 
 module.exports = route
