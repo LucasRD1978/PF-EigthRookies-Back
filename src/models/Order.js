@@ -8,7 +8,9 @@ module.exports = (sequelize) => {
         'inCart',
         'pending',
         'finished',
-        'cancelled'
+        'cancelled',
+        'delivery',
+        'delivered',
       ),
       allowNull: false,
     },

@@ -21,7 +21,7 @@ const routeUpDateProfileUser=require('./routeUpDateProfileUser')
 const routeUpDateFunction=require('./routeUpdateFunction')
 const routeTaskManager=require('./routeTaskManager');
 const getHistoryPurchase = require('./getHistoryPurchase')
-
+const upDateStatus=require('./routeUpdatesatus')
 const router = Router();
 
 // Configurar los routers
@@ -48,6 +48,6 @@ router.use("/mercadopay", mercadoPago);
 router.use('/routeReview', routeReview);
 router.use('/taskmanager',routeTaskManager)
 router.use('/purchases', getHistoryPurchase);
-
+router.use('/updateStatus',upDateStatus)
 
 module.exports = router;

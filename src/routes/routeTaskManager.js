@@ -6,7 +6,7 @@ const route = Router()
 route.get('/',(req,res,next)=>{
     const{user}=req.query
     Order.findAll({
-        where:{status:'inCart'},
+       // where:{status:'inCart'},
          include:[{
             
              model:User,
@@ -19,6 +19,7 @@ route.get('/',(req,res,next)=>{
     .then((r)=>res.send(r))
     .catch(()=>next())
 })
+
 
 
 module.exports=route
