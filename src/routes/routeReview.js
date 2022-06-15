@@ -136,16 +136,12 @@ route.get('/pagado', async (req,res,next)=>{
     const { userEmail, productId} = req.query;
     try{
     const result = await Order.findAll({
-        where:{status:'finished',userEmail:userEmail, productId: productId},
-         include:{
-            
-             model:User,
-            }
+        where:{status:'finished',userEmail:userEmail, productId: productId}
         })
 
         if(result.length){
-            res.status(200).send(result)
-        } else res.status(400).send([{msg:"false"}])
+            res.status(200).send(true)
+        } else res.status(400).send(false)
     } catch(error){
         console.log(error,"Error en el proceso de consulta")
         next();
