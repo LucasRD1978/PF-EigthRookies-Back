@@ -29,13 +29,11 @@ route.get("/:id", async (req, res, next) => {
             res.status(400).send({msg:"id not found"})
         }else{
 
-            //console.log(idCategorySearched)
             res.status(200).send(idCategorySearched)
         }
     
     } catch (error) {
-        return res.status(400).send({msg:"ID not was found"})
-        //next(error)
+        return res.status(400).send({ msg: "ID not was found" })
     }
 })
 

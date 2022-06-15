@@ -1,5 +1,4 @@
-const {Products, Category,User} =require('../db.js');
-const axios = require('axios');
+const { Products, Category, User } = require('../db.js');
 const { Router } = require('express');
 const{Op}=require('sequelize')
 const route = Router()
@@ -25,6 +24,22 @@ route.post('/',(req,res,next)=>{
     .then(()=>{return res.status(200).send({msg:`${email}:${first_name}..creado`})})
     .catch(()=>next())
 })
+
+route.get('/:user', async (req, res) => {
+    try {
+        const { user } = req.params;
+        console.log(user)
+        const foundUser = await User.findByPk(user);
+        if(foundUser){
+        return res.send(foundUser)
+        }
+        return res.send({msg: "could not find user"})
+    } catch (err) {
+      console.log("Error",err);
+      return false;
+    }
+  })
+  
 
 
 module.exports=route

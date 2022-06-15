@@ -8,7 +8,9 @@ module.exports = (sequelize) => {
         'inCart',
         'pending',
         'finished',
-        'cancelled'
+        'cancelled',
+        'delivery',
+        'delivered',
       ),
       allowNull: false,
     },
@@ -44,6 +46,10 @@ module.exports = (sequelize) => {
     localCancelDate: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    address:{
+      type: DataTypes.STRING,
+      allowNull: true
     },
   });
 };

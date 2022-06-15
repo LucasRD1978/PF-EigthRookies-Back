@@ -6,7 +6,7 @@ const{Op}=require('sequelize')
 const route = Router()
 
 route.put('/:numeroPagina',(req,res,next)=>{
-    //let  estadoArray=[1,2,3,4,5,6,7,8,9,10,11,12,13]
+
     const{numeroPagina}=req.params
     const{estadoArray}=req.body
     let cantidadEnVista=3
@@ -22,9 +22,8 @@ route.get(
       const { query } = req;
       const pageSize = query.pageSize || 8;
       const page = query.page || 1;
-      const category = query.category || '';
-      const price = query.price || '';
-      // const rating = query.rating || '';
+      const category = query.category*1 || '';
+    const price = query.price || '';
       const order = query.order || '';
       const searchQuery = query.query || '';
 
@@ -37,16 +36,7 @@ route.get(
         }
       : {};
     
-  const categoryFilter = category && category !== 'all' ? { id: category } : {};
-
-  // const ratingFilter =
-  //   rating && rating !== 'all'
-  //     ? {
-  //         rating: {
-  //           [Op.eq]: Number(rating),
-  //         },
-  //       }
-  //     : {};
+    const categoryFilter = category && category !== 'all' ? { id: category } : {};
   const priceFilter =
   price && price !== '' 
   ? { price: {[Op.lte]: Number(price) ,

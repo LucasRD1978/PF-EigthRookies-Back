@@ -1,5 +1,5 @@
 const server = require('./src/app.js');
-const { conn, Rol } = require('./src/db.js');
+const { conn } = require('./src/db.js');
 
 const{CargarTodo}=require('./src/controladores/cargaProductosBDv1')
 const { cargarUsuario, arrObj } = require('./src/controladores/cargarAdmin')

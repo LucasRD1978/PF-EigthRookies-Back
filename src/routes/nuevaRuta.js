@@ -1,13 +1,10 @@
-const {Products, Category} =require('../db.js');
-const axios = require('axios');
+const { Products, Category } = require('../db.js');
 const { Router } = require('express');
 const{Op}=require('sequelize')
 const route = Router()
 
 route.put('/:page',(req,res,next)=>{
-    //const category=''
-    //const price=''
-    console.log(rteq.body)
+
     const{page}=req.params
     const{category,price}=req.body
     if(category&&price){
@@ -44,7 +41,7 @@ route.put('/:page',(req,res,next)=>{
 
             offset:page*10+10,
 
-            limit:10,                             
+            limit: 10,
             where:{price:{[Op.gt]:[price*1-5000],
                 [Op.lt]:[price*1+5000]}}
         })
@@ -53,14 +50,11 @@ route.put('/:page',(req,res,next)=>{
     } 
     Products.findAll({
 
-        offset:page*10+10,
-
-        limit:10,                                                                                                                
+        offset: page * 10 + 10,
+        limit: 10,
     })
     .then((r)=>{return res.status(200).send(r)})
-    .catch(()=>next())                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-                                                                                                                                                                                                                                                                                                                     
-                                
+        .catch(() => next());
 })
 
 module.exports=route

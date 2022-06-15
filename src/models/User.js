@@ -17,15 +17,10 @@ module.exports = (sequelize) => {
 
         last_name: {
             type: DataTypes.STRING,
-            allowNull: false
-        },
-
-        image: {
-            type: DataTypes.STRING,
             allowNull: true
         },
 
-        password: {
+        image: {
             type: DataTypes.STRING,
             allowNull: true
         },
@@ -49,8 +44,6 @@ module.exports = (sequelize) => {
             type:DataTypes.STRING,
             defaultValue:'usuario'
         }
-
-        
 
     })
 }
