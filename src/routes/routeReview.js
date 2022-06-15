@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const {Products, Review, User, Category} = require('../db');
+const {Products, Review, User, Category, Order} = require('../db');
 const {Op} = require('sequelize');
 
 const route = Router();
@@ -130,6 +130,28 @@ route.delete('/:productId/review/:id', (req, res) => {
             data: err
         })
     })
+})
+
+route.get('/pagado', async (req,res,next)=>{
+    const { userEmail, productId} = req.query;
+    try{
+    const result = await Order.findAll({
+        where:{status:'finished',userEmail:userEmail, productId: productId},
+         include:{
+            
+             model:User,
+            }
+        })
+
+        if(result.length){
+            res.status(200).send(result)
+        } else res.status(400).send([{msg:"false"}])
+    } catch(error){
+        console.log(error,"Error en el proceso de consulta")
+        next();
+    }
+
+    
 })
 
 module.exports = route
