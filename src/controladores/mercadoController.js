@@ -2,15 +2,16 @@ const mercadopago = require('mercadopago');
 require('dotenv').config();
 const { ACCESS_TOKEN } = process.env;
 const { redirect } = require('express/lib/response');
-const { User, ShoppingCar } = require('../db');
+const { ShoppingCar } = require('../db');
 const { sendEmailPurchase } = require('../controladores/util/sendEmail');
+const purchaseHistory = require('./purchaseHistory')
 
-let emailSend = null;
+let email = null;
 
 const createOrder = async (req, res, next) => {
 
     const { carrito, userEmail } = req.body;
-    emailSend = userEmail;
+    email = userEmail;
 
     mercadopago.configure({
         access_token: ACCESS_TOKEN
@@ -52,10 +53,11 @@ const handleStatus = async (req, res, next) => {
         const newShoppingCar = await ShoppingCar.create({
             status: status.status,
             payment_id: status.payment_id,
-            payment_type: status.payment_type
+            payment_type: status.payment_type,
         });
 
-        //sendEmailPurchase(emailSend, newShoppingCar.payment_id);
+        purchaseHistory(newShoppingCar, email)
+        //sendEmailPurchase(email, newShoppingCar.payment_id);
 
         res.redirect(`http://localhost:3000/purchase/${newShoppingCar.payment_id}`);
 

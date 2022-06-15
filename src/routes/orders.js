@@ -28,9 +28,9 @@ route.post("", async (req, res) => {
 
 route.put('/', async function (req, res) {
   try {
-    const { status, amount, productId } = req.body;
+    const { status, amount, productId, user} = req.body;
     if (amount) { //si cambia el amount
-      const orderChanged = await putOrder(productId, amount, status);
+      const orderChanged = await putOrder(productId, amount, status, user);
       if (typeof orderChanged !== 'boolean') {
         return res.send(orderChanged);
       } else if (orderChanged) {
