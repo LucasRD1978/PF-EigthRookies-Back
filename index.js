@@ -12,3 +12,4 @@ conn.sync({ force: true }).then(() => {
     cargarUsuario(arrObj)
   });
 });
+
