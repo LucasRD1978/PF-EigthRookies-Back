@@ -4,11 +4,13 @@ const {Op} = Sequelize.Op
 
 
 const getProductsOrder = async (status, user, purchaseId) => {
+  let whereStatement = ''
+
   try {
     if(status === "finished"){
-      const whereStatement = { where: { status: status, userEmail: user, purchaseId: purchaseId } };
+      whereStatement = { where: { status: status, userEmail: user, purchaseId: purchaseId } };
     } else {
-      const whereStatement = { where: { status: status, userEmail: user } }
+      whereStatement = { where: { status: status, userEmail: user } }
     }
   
     const inCartProducts = await Products.findAll({
