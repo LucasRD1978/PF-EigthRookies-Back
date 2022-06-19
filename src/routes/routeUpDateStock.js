@@ -4,16 +4,19 @@ const { Router } = require('express');
 
 const route = Router()
 
-route.put('/:id',(req,res,next)=>{
+route.put('/:id',async(req,res,next)=>{
     const{id}=req.params
-    const{amount,purchaseQuantity}=req.body
-    Products.update({
+    const{Quantity}=req.body
+    let p=await Products.findOne({
+        where:{id:id}
+    })
+    let amount=await p.amount
+    await Products.update({
 
-        cantidad:amount*1-purchaseQuantity*1
+        amount:(amount*1-Quantity*1)>0?amount*1-Quantity*1:0
 },{where:{id:id}})
   
-    .then(()=>{res.send({msg:'stock isUpdate'})})
-    .catch(()=>next())
+    
 
 })
 
