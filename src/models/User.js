@@ -25,11 +25,6 @@ module.exports = (sequelize) => {
             allowNull: true
         },
 
-        password: {
-            type: DataTypes.STRING,
-            allowNull: true
-        },
-
         phone: {
             type: DataTypes.STRING,
             allowNull: true
@@ -49,8 +44,6 @@ module.exports = (sequelize) => {
             type:DataTypes.STRING,
             defaultValue:'usuario'
         }
-
-        
 
     })
 }

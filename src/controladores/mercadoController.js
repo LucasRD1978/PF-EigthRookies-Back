@@ -57,7 +57,7 @@ const handleStatus = async (req, res, next) => {
         });
 
         purchaseHistory(newShoppingCar, email)
-        //sendEmailPurchase(email, newShoppingCar.payment_id);
+        sendEmailPurchase(email, newShoppingCar.payment_id);
 
         res.redirect(`http://localhost:3000/purchase/${newShoppingCar.payment_id}`);
 

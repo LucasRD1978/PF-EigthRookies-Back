@@ -1,5 +1,4 @@
-const {User} =require('../db.js');
-const axios = require('axios');
+const { User } = require('../db.js');
 const { Router } = require('express');
 
 const route = Router()
@@ -7,8 +6,7 @@ const route = Router()
 route.put('/:id',(req,res,next)=>{
     const{id}=req.params
     const{first_name,last_name,address,phone,postal_code}=req.body
-    console.log(id)
-    console.log(req.body)
+
     User.update({
         first_name:first_name,
         last_name:last_name,

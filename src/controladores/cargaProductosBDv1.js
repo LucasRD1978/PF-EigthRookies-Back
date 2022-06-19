@@ -19,8 +19,8 @@ for(let i=0;i<10;i++){
         .then(async(r)=>{
             for(let e of r){
                 aux1=[...aux1,...e]
-            }
-            ;console.log(aux1.length,'electronica');aux1=aux1.map(info=>
+            };
+            console.log(`Loading ${aux1.length} products`); aux1 = aux1.map(info =>
                 {aux2.push(info.domain_id.split('-')[1]);return {
                     id:info.id,
                     title:info.title,
@@ -44,20 +44,10 @@ for(let i=0;i<10;i++){
                     await Category.findOrCreate({
                         where:{name:e.category}
                     })
-                }    
-               // asociar(aux1)    
-               // console.log('alf')    
-        
-
-
+                }
             })
-    
         .then(()=>{asociar(aux1);console.log('..ready')})    
-    }
-     
-
-
-
-
+}
+    
 module.exports={CargarTodo}
 

@@ -1,5 +1,4 @@
-const {Products, Category,User} =require('../db.js');
-const axios = require('axios');
+const { Products, Category, User } = require('../db.js');
 const { Router } = require('express');
 const{Op}=require('sequelize')
 const route = Router()

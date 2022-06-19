@@ -1,11 +1,10 @@
-const {Products, Category} =require('../db.js');
-const axios = require('axios');
+const { Products, Category } = require('../db.js');
 const { Router } = require('express');
 const{Op}=require('sequelize')
 const route = Router()
 
 route.get('/price/:rango',(req,res,next)=>{
-    console.log('pego')
+
     let{rango}=req.params
     
     Products.findAll({

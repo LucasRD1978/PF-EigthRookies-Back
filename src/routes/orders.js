@@ -28,7 +28,7 @@ route.post("", async (req, res) => {
 
 route.put('/', async function (req, res) {
   try {
-    const { status, amount, productId, user} = req.body;
+    const { status, amount, productId, user } = req.body;
     if (amount) { //si cambia el amount
       const orderChanged = await putOrder(productId, amount, status, user);
       if (typeof orderChanged !== 'boolean') {
@@ -77,8 +77,8 @@ route.delete('/:id', async function (req, res) {
 route.post('/postAllOrders', async function (req, res) {
   try {
     const { user, address } = req.body;
-    // const user = req.user.user;
     const created = await postAllOrders({ user, address });
+
     if (typeof created !== 'boolean') {
       return res.send(created);
     } else if (created) {

@@ -14,7 +14,9 @@ route.use(express.json());
 route.get("/userList", authorization, (req, res) => {
 
     User.findAll({
-        include: 'scope'
+        include: {
+            model: ShoppingCar
+        }
     })
         .then(r => {
             res.send(r);
@@ -48,20 +50,19 @@ route.post("/register", async (req, res) => {
         user = await User.create({email, first_name, last_name ,image, phone, postal_code, address
         })
 
-        //sendEmailWelcome(email)
+        sendEmailWelcome(email)
         const token = generatorToken(user);
         res.json({ token, user });
 
     } else {
         
-        if(user.dataValues.functions==='banned'){return res.send('banned')}
-        else{
+        if (user.dataValues.functions === 'banned') {
+            return res.send('banned');
+        } else {
         const token = generatorToken(user);
-        return res.status(201).json({token, user})}
-        
+            return res.status(201).json({ token, user });
+        }    
     }
-     
-
     } catch (error) {
         console.log(error);
         res.status(400).send({ msg: "Error creating a user" });

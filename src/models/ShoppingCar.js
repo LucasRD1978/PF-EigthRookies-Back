@@ -15,9 +15,6 @@ module.exports = (sequelize) => {
         },
         fullPrice: {
             type: DataTypes.FLOAT,
-        },
-        products: {
-            type: DataTypes.ARRAY(DataTypes.STRING)
         }
     })
 }

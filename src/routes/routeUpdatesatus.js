@@ -1,5 +1,4 @@
-const {Products, Category,User,Order} =require('../db.js');
-const axios = require('axios');
+const { Products, Category, User, Order } = require('../db.js');
 const { Router } = require('express');
 const route = Router()
 
@@ -8,9 +7,7 @@ const route = Router()
 route.put('/:id',(req,res,next)=>{
     const{id}=req.params
     const{status}=req.body
-    console.log("algo")
-    console.log(status)
-    console.log(id)
+
     Order.update({
         status:status
     },{

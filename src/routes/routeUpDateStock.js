@@ -1,5 +1,4 @@
-const {Products, Category} =require('../db.js');
-const axios = require('axios');
+const { Products, Category } = require('../db.js');
 const { Router } = require('express');
 
 const route = Router()
