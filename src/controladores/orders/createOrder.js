@@ -15,7 +15,7 @@ const createOrder = async (status, amount, emailID, productId) => {
         if(!existingOrder) {
             const newOrder = await Order.create({
                 status: status,
-                amount: orderAmount
+                amount: orderAmount 
             })
         await foundUser.addOrder(newOrder);
         await foundProduct.addOrder(newOrder);

@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define('order', {
     status: {
       type: DataTypes.ENUM(
-        'inWishList',
+        // 'inWishList',
         'inCart',
         'pending',
         'finished',

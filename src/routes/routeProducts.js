@@ -73,3 +73,14 @@ la de los productos,
 *la product detail 
 *desde el lado del adm para editar/eliminar productos
 */
+
+
+
+
+
+
+
+
+
+
+

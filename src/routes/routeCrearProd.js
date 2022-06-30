@@ -7,7 +7,7 @@ const route = Router()
 
 
 route.post('/',async(req,res,next)=>{
-    let{name,price, description,image,image2,image3, image4,category}=req.body
+    let{name,price, description,image,image2,image3, image4,category, amount}=req.body
     if(!image2){image2=""}
     if(!image3){image3=""}
     if(!image4){image4=""}
@@ -22,6 +22,7 @@ route.post('/',async(req,res,next)=>{
             image2:image2,
             image3:image3,
             image4:image4,
+            amount: amount
 
         }
     })
